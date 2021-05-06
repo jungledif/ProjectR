@@ -65,15 +65,18 @@
 
             this.ground = this.add.tileSprite(0, height, width, 170, 'ground').setOrigin(0, 1);
 
-            var platforms;
+            // var platforms;
             platforms = this.physics.add.staticGroup();
             platforms.create(400, 680, 'groundinvi').setScale(2).refreshBody();
+            platforms.create(400, 245, 'groundinvi').setScale(2).refreshBody();
 
-            var player;
+            // let player
             player = this.physics.add.sprite(100, 400, 'perso');
             player.setCollideWorldBounds(true);
             player.setGravityY(5000);
             this.physics.add.collider(player, platforms);
+
+            // console.log(this.physics.add.collider(player, platforms))
 
             this.anims.create({
                 key: 'running',
@@ -96,20 +99,18 @@
                 repeat: -1
             });
 
+            console.log(player.body.deltaAbsY());
+            console.log(player.body.y);
+            console.log(player);
 
-            if (player.body.deltaAbsY() > 0) {
-                player.anims.play('jump', true);
-            } else {
-                player.body.height <= 58 ?
-                    player.anims.play('down', true) :
-                    player.anims.play('running', true);
-            }
+
 
             this.input.keyboard.on('keydown_SPACE', () => {
                 player.body.height = 92;
                 player.body.offset.y = 0;
-
                 player.setVelocityY(-1600);
+                player.anims.play('jump', true);
+
             })
 
             this.input.keyboard.on('keydown_DOWN', () => {
@@ -118,14 +119,29 @@
                 player.body.offset.y = 34;
             })
 
+            if (this.physics.add.collider(player, platforms).active == true) {
+                player.anims.play('running', true);
+            }
 
-
-
-
+            if (player.body.deltaAbsY() > 0) {
+                player.anims.play('jump', true);
+            } else {
+                player.body.height <= 58 ?
+                    player.anims.play('down', true) :
+                    player.anims.play('running', true);
+            }
         }
 
         function update() {
             this.ground.tilePositionX += this.gameSpeed;
+
+            if (player.body.deltaAbsY() > 0) {
+                player.anims.play('jump', true);
+            } else {
+                player.body.height <= 58 ?
+                    player.anims.play('down', true) :
+                    player.anims.play('running', true);
+            }
         }
     </script>
 </body>
