@@ -15,6 +15,37 @@
 <body>
     <script src=»//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js »></script>
     <script type="text/javascript">
+    
+     var game = new Phaser.Game(config);
+   class TitleScene extends Phaser.Scene {
+    constructor(){
+        super({key: 'TitleScene'});
+    }
+    preload(){
+        this.load.image('background_image', 'assets/background.png');
+        this.load.image('start_button', 'assets/start_button_3.png');
+    }
+    create (){
+        let background = this.add.sprite(200,0, 'background_image');
+        background.setOrigin(0, 0);
+        let title_button = this.add.sprite(650, 400, 'start_button');
+        this.input.on('pointerdown', function () {
+
+this.sys.game.destroy(true);
+
+document.addEventListener('mousedown', function newGame () {
+
+    game = new Phaser.Game(config);
+
+    document.removeEventListener('mousedown', newGame);
+
+});
+
+}, this);
+
+    }
+}
+    let titleScene = new TitleScene();
         var config = {
             type: Phaser.AUTO,
             width: 1280,
@@ -33,13 +64,15 @@
             }
         };
 
-        var game = new Phaser.Game(config);
+       
+        game.scene.add('TitleScene', titleScene);
+        game.scene.start('TitleScene');
 
         function preload() {
             this.load.image('sky', 'assets/sky.png');
             this.load.image('ground', 'assets/groundmvp.png');
             this.load.image('groundinvi', 'assets/groundinvi.png');
-
+            this.load.image('background_image', 'assets/background.png');
             this.load.spritesheet('perso', 'assets/perso-run.png', {
                 frameWidth: 88,
                 frameHeight: 94
@@ -64,11 +97,12 @@
             this.add.image(640, 360, 'sky');
 
             this.ground = this.add.tileSprite(0, height, width, 170, 'ground').setOrigin(0, 1);
-
+            
             // var platforms;
             platforms = this.physics.add.staticGroup();
             platforms.create(400, 680, 'groundinvi').setScale(2).refreshBody();
             platforms.create(400, 245, 'groundinvi').setScale(2).refreshBody();
+            
 
             // let player
             player = this.physics.add.sprite(100, 400, 'perso');
@@ -131,6 +165,21 @@
                     player.anims.play('running', true);
             }
         }
+        pause_label = game.add.text(w - 100, 20, 'Pause', { font: '24px Arial', fill: '#fff' });
+    pause_label.inputEnabled = true;
+    pause_label.events.onInputUp.add(function () {
+        // When the paus button is pressed, we pause the game
+        game.paused = true;
+
+        // Then add the menu
+        menu = game.add.sprite(w/2, h/2, 'menu');
+        menu.anchor.setTo(0.5, 0.5);
+
+        // And a label to illustrate which menu item was chosen. (This is not necessary)
+        choiseLabel = game.add.text(w/2, h-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiseLabel.anchor.setTo(0.5, 0.5);
+    });
+    
 
         function update() {
             this.ground.tilePositionX += this.gameSpeed;
@@ -143,7 +192,9 @@
                     player.anims.play('running', true);
             }
         }
+        
     </script>
+    
 </body>
 
 </html>
