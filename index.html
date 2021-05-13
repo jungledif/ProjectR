@@ -103,20 +103,34 @@
             console.log(player.body.y);
             console.log(player);
 
-
+            var jumpTime = 0;
+            var downTime = 0;
 
             this.input.keyboard.on('keydown_SPACE', () => {
+                if (!jumpTime == 0) { return; }
                 player.body.height = 92;
                 player.body.offset.y = 0;
                 player.setVelocityY(-1600);
                 player.anims.play('jump', true);
-
+                jumpTime = 1;
             })
 
-            this.input.keyboard.on('keydown_DOWN', () => {
 
+            this.input.keyboard.on('keyup_SPACE', () => {
+                jumpTime = 0;
+            })
+
+
+            this.input.keyboard.on('keydown_DOWN', () => {
+                if (!downTime == 0) { return; }
                 player.body.height = 58;
                 player.body.offset.y = 34;
+                downTime = 1;
+                setTimeout(reUp, 150);
+            })
+
+            this.input.keyboard.on('keyup_DOWN', () => {
+                downTime = 0;
             })
 
             if (this.physics.add.collider(player, platforms).active == true) {
@@ -130,6 +144,11 @@
                     player.anims.play('down', true) :
                     player.anims.play('running', true);
             }
+        }
+
+        function reUp() {
+            player.body.height = 92;
+            player.body.offset.y = 0;
         }
 
         function update() {
