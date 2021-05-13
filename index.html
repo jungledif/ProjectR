@@ -60,6 +60,20 @@
 
         function create() {
             this.gameSpeed = 6;
+
+            this.input.keyboard.on('keydown_ESC', function () {
+                //  Every single animation in the Animation Manager will be paused:
+                if (this.anims.paused) {
+                    this.anims.resumeAll();
+                    this.gameSpeed = 6;
+                }
+                else {
+                    this.anims.pauseAll();
+                    this.ground.tilePositionX = 0;
+                    this.gameSpeed = 0;
+                }
+            }, this);
+
             const { height, width } = this.game.config;
             this.add.image(640, 360, 'sky');
 
