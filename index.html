@@ -127,6 +127,10 @@
                 player.setVelocityY(-1600);
                 player.anims.play('jump', true);
                 jumpTime = 1;
+
+                //simumation perte de vie
+                Vies = this.data.set('vies', this.data.get('vies') - 1);
+                console.log(this.data.get('vies'));
             })
 
 
@@ -140,6 +144,7 @@
                 player.body.height = 58;
                 player.body.offset.y = 34;
                 downTime = 1;
+                player.setVelocityY(+1600);
                 setTimeout(reUp, 150);
             })
 
@@ -151,13 +156,17 @@
                 player.anims.play('running', true);
             }
 
-            if (player.body.deltaAbsY() > 0) {
-                player.anims.play('jump', true);
-            } else {
-                player.body.height <= 58 ?
-                    player.anims.play('down', true) :
-                    player.anims.play('running', true);
-            }
+            // if (player.body.deltaAbsY() > 0) {
+            //     player.anims.play('jump', true);
+            // } else {
+            //     player.body.height <= 58 ?
+            //         player.anims.play('down', true) :
+            //         player.anims.play('running', true);
+            // }
+
+            timeText = this.add.text(1100, 150, '', { font: '30px Courier', fill: '#00ff00' });
+            textVies = this.add.text(1100, 120, '', { font: '30px Courier', fill: '#00ff00' });
+            Vies = this.data.set('vies', 3);
         }
 
         function reUp() {
@@ -165,8 +174,17 @@
             player.body.offset.y = 0;
         }
 
-        function update() {
+        var timeText;
+        var textVies;
+        var vies;
+
+        function update(time) {
             this.ground.tilePositionX += this.gameSpeed;
+
+            timeText.setText('Temps : ' + time);
+            textVies.setText('Vies : ' + this.data.get('vies'));
+
+
 
             if (player.body.deltaAbsY() > 0) {
                 player.anims.play('jump', true);
