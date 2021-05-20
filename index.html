@@ -65,11 +65,14 @@
                 //  Every single animation in the Animation Manager will be paused:
                 if (this.anims.paused) {
                     this.anims.resumeAll();
-                    this.gameSpeed = 6;
+                    // this.gameSpeed = 6;
+                    console.log(currentSpeedRun);
+                    this.gameSpeed = currentSpeedRun;
                     timePause = false;
                 }
                 else {
                     this.anims.pauseAll();
+                    currentSpeedRun = this.gameSpeed;
                     this.gameSpeed = 0;
                     timePause = true;
                 }
@@ -159,6 +162,7 @@
 
             timeText = this.add.text(1100, 20, '', { font: '30px Roboto', fill: '#00ff00' });
             textVies = this.add.text(1100, 50, '', { font: '30px Roboto', fill: '#00ff00' });
+            textVitesse = this.add.text(1100, 80, '', { font: '30px Roboto', fill: '#00ff00' });
             Vies = this.data.set('vies', 3);
 
 
@@ -172,14 +176,16 @@
 
         var timeText;
         var textVies;
+        var textVitesse;
 
+        var currentSpeedRun;
         var timePause = false;
 
         function update() {
             this.ground.tilePositionX += this.gameSpeed;
-
             timeText.setText('Temps : ' + minute + " : " + seconde);
             textVies.setText('Vies : ' + this.data.get('vies'));
+            textVitesse.setText('Vitesse : ' + this.gameSpeed);
 
             if (player.body.deltaAbsY() > 0) {
                 player.anims.play('jump', true);
@@ -192,8 +198,19 @@
 
         var seconde = 0;
         var minute = 0;
+
+        function loopSeconde() {
+            if (seconde == 10 || seconde == 20 || seconde == 30 || seconde == 40 || seconde == 50 || seconde == 59) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         function onEvent() {
             !timePause ? seconde++ : 0;
+
+            if (loopSeconde() == true) { this.gameSpeed++ };
 
             if (seconde > 59) {
                 minute++;
