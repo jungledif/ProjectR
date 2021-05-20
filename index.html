@@ -66,13 +66,13 @@
                 if (this.anims.paused) {
                     this.anims.resumeAll();
                     // this.gameSpeed = 6;
-                    console.log(currentSpeedRun);
-                    this.gameSpeed = currentSpeedRun;
+                    console.log(currentGameSpeed);
+                    this.gameSpeed = currentGameSpeed;
                     timePause = false;
                 }
                 else {
                     this.anims.pauseAll();
-                    currentSpeedRun = this.gameSpeed;
+                    currentGameSpeed = this.gameSpeed;
                     this.gameSpeed = 0;
                     timePause = true;
                 }
@@ -178,7 +178,7 @@
         var textVies;
         var textVitesse;
 
-        var currentSpeedRun;
+        var currentGameSpeed;
         var timePause = false;
 
         function update() {
