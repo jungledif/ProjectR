@@ -66,11 +66,12 @@
                 if (this.anims.paused) {
                     this.anims.resumeAll();
                     this.gameSpeed = 6;
+                    timePause = false;
                 }
                 else {
                     this.anims.pauseAll();
-                    this.ground.tilePositionX = 0;
                     this.gameSpeed = 0;
+                    timePause = true;
                 }
             }, this);
 
@@ -130,7 +131,7 @@
 
                 //simumation perte de vie
                 Vies = this.data.set('vies', this.data.get('vies') - 1);
-                console.log(this.data.get('vies'));
+                // console.log(this.data.get('vies'));
             })
 
 
@@ -156,17 +157,12 @@
                 player.anims.play('running', true);
             }
 
-            // if (player.body.deltaAbsY() > 0) {
-            //     player.anims.play('jump', true);
-            // } else {
-            //     player.body.height <= 58 ?
-            //         player.anims.play('down', true) :
-            //         player.anims.play('running', true);
-            // }
-
-            timeText = this.add.text(1100, 150, '', { font: '30px Courier', fill: '#00ff00' });
-            textVies = this.add.text(1100, 120, '', { font: '30px Courier', fill: '#00ff00' });
+            timeText = this.add.text(1100, 20, '', { font: '30px Roboto', fill: '#00ff00' });
+            textVies = this.add.text(1100, 50, '', { font: '30px Roboto', fill: '#00ff00' });
             Vies = this.data.set('vies', 3);
+
+
+            timedEvent = this.time.addEvent({ delay: 1000, callback: onEvent, callbackScope: this, loop: true });
         }
 
         function reUp() {
@@ -176,15 +172,14 @@
 
         var timeText;
         var textVies;
-        var vies;
 
-        function update(time) {
+        var timePause = false;
+
+        function update() {
             this.ground.tilePositionX += this.gameSpeed;
 
-            timeText.setText('Temps : ' + time);
+            timeText.setText('Temps : ' + minute + " : " + seconde);
             textVies.setText('Vies : ' + this.data.get('vies'));
-
-
 
             if (player.body.deltaAbsY() > 0) {
                 player.anims.play('jump', true);
@@ -192,6 +187,18 @@
                 player.body.height <= 58 ?
                     player.anims.play('down', true) :
                     player.anims.play('running', true);
+            }
+        }
+
+        var seconde = 0;
+        var minute = 0;
+        function onEvent() {
+            !timePause ? seconde++ : 0;
+
+            if (seconde > 59) {
+                minute++;
+                seconde = 0;
+
             }
         }
     </script>
