@@ -141,7 +141,6 @@ class PlayScene extends Phaser.Scene {
         // this.gameSpeed = 0;
         currentGameSpeed = this.gameSpeed;
         this.gameSpeed = 0;
-        console.log(this.gameSpeed);
       }
     }, this);
 
