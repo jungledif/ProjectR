@@ -13,38 +13,43 @@ class PlayScene extends Phaser.Scene {
     this.respawnTime = 0;
     this.score = 0;
     this.timePause = false;
+    this.minute = 0;
+    this.seconde = 0;
+    this.vies = this.data.set('vies', 3);
 
     this.add.image(640, 360, 'sky');
-
     this.ground = this.add.tileSprite(0, height, width, 170, 'ground').setOrigin(0, 1);
     this.platforms = this.physics.add.staticGroup();
     this.platforms.create(400, 690, 'groundinvi').setScale(2).refreshBody();
     this.platforms.create(400, 245, 'groundinvi').setScale(2).refreshBody();
-
     this.player = this.physics.add.sprite(100, 400, 'perso').setCollideWorldBounds(true).setGravityY(8000);
-
-    this.scoreText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' })
-    // .setOrigin(1, 0)
-    // .setAlpha(1);
-
-    this.highScoreText = this.add.text(1050, 0, '', { fill: "#535353", font: '900 35px Roboto' })
-    // .setOrigin(1, 0)
-    // .setAlpha(0);
-
     this.obsticles = this.physics.add.group();
 
-    this.timeText = this.add.text(1050, 30, '', { font: '900 35px Roboto', fill: '#ffffff' });
-    this.textVies = this.add.text(1050, 60, '', { font: '900 35px Roboto', fill: '#ffffff' });
-    this.textVitesse = this.add.text(1050, 90, '', { font: '900 35px Roboto', fill: '#ffffff' });
-    this.vies = this.data.set('vies', 3);
-    this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true });
-    this.minute = 0;
-    this.seconde = 0;
-
+    this.initTimeEvent();
+    this.initText();
     this.initAnims();
     this.initColliders();
     this.handleInputs();
-    this.handleScore();
+  }
+
+  initTimeEvent() {
+    this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEventTimer, callbackScope: this, loop: true });
+    this.timedEventScore = this.time.addEvent({ delay: 1000 / 10, callback: this.onEventScore, callbackScope: this, loop: true });
+  }
+
+  initText() {
+    this.scoreText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' });
+    this.highScoreText = this.add.text(1050, 0, '', { fill: "#535353", font: '900 35px Roboto' })
+    this.timeText = this.add.text(1050, 30, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textVies = this.add.text(1050, 60, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textVitesse = this.add.text(1050, 90, '', { font: '900 35px Roboto', fill: '#ffffff' });
+  }
+
+  displayText() {
+    this.scoreText.setText('Score: ' + this.score);
+    this.timeText.setText('Temps : ' + this.minute + " : " + this.seconde);
+    this.textVies.setText('Vies : ' + this.data.get('vies'));
+    this.textVitesse.setText('Vitesse : ' + Math.trunc(this.gameSpeed));
   }
 
   initColliders() {
@@ -102,38 +107,6 @@ class PlayScene extends Phaser.Scene {
     })
   }
 
-  handleScore() {
-    this.time.addEvent({
-      delay: 1000 / 10,
-      loop: true,
-      callbackScope: this,
-      callback: () => {
-        if (!this.isGameRunning) { return; }
-
-        this.score++;
-        this.gameSpeed += 0.02
-
-        if (this.score % 100 === 0) {
-          //this.reachSound.play();
-
-          this.tweens.add({
-            targets: this.scoreText,
-            duration: 100,
-            repeat: 3,
-            alpha: 0,
-            yoyo: true
-          })
-        }
-
-        const score = Array.from(String(this.score), Number);
-        for (let i = 0; i < 5 - String(this.score).length; i++) {
-          score.unshift(0);
-        }
-
-        this.scoreText.setText('Score: ' + score.join(''));
-      }
-    })
-  }
 
   handleInputs() {
 
@@ -202,7 +175,6 @@ class PlayScene extends Phaser.Scene {
       obsticle.play('enemy--spe1', 1);
       obsticle.body.height = 110;
       obsticle.body.width = 85;
-      console.log(obsticle);
     } else {
       obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], `enemy${obsticleNum}`);
       obsticle.play(`enemy${obsticleNum}`, 1);
@@ -212,14 +184,36 @@ class PlayScene extends Phaser.Scene {
     obsticle.setImmovable();
   }
 
-  onEvent() {
+  onEventTimer() {
+
     !this.timePause ? this.seconde++ : 0;
-
-    // if (this.loopSeconde() == true) { this.gameSpeed++ };
-
     if (this.seconde > 59) {
       this.minute++;
       this.seconde = 0;
+    }
+  }
+
+  onEventScore() {
+
+    if (!this.isGameRunning) { return; }
+    this.score++;
+    this.gameSpeed += 0.02
+
+    if (this.score % 100 === 0) {
+      //this.reachSound.play();
+
+      this.tweens.add({
+        targets: this.scoreText,
+        duration: 100,
+        repeat: 3,
+        alpha: 0,
+        yoyo: true
+      })
+    }
+
+    const score = Array.from(String(this.score), Number);
+    for (let i = 0; i < 5 - String(this.score).length; i++) {
+      score.unshift(0);
     }
   }
 
@@ -227,10 +221,7 @@ class PlayScene extends Phaser.Scene {
 
     this.ground.tilePositionX += this.gameSpeed;
     Phaser.Actions.IncX(this.obsticles.getChildren(), -this.gameSpeed);
-
-    this.timeText.setText('Temps : ' + this.minute + " : " + this.seconde);
-    this.textVies.setText('Vies : ' + this.data.get('vies'));
-    this.textVitesse.setText('Vitesse : ' + Math.trunc(this.gameSpeed));
+    this.displayText();
 
     this.respawnTime += delta * this.gameSpeed * 0.08;
     if (this.respawnTime >= 700) {
