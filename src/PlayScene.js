@@ -154,7 +154,6 @@ class PlayScene extends Phaser.Scene {
       this.player.body.offset.y = 0;
       this.player.setVelocityY(-2600);
       jumpTime = 1;
-      //setTimeout(() => {this.player.body.height = 92; this.player.body.offset.y = 0}, 350);
     })
 
     this.input.keyboard.on('keyup_SPACE', () => {
@@ -172,28 +171,6 @@ class PlayScene extends Phaser.Scene {
     this.input.keyboard.on('keyup_DOWN', () => {
       downTime = 0;
     })
-
-    /*this.time.addEvent({
-      delay: 450,
-      loop: true,
-      callbackScope: this,
-      callback: () => {
-        if (!this.player.body.height == 91) { return; }
-        this.player.body.height = 92;
-        this.player.body.offset.y = 0;
-      }
-    })*/
-
-    /*this.time.addEvent({
-      delay: 300,
-      loop: true,
-      callbackScope: this,
-      callback: () => {
-        if (!this.player.body.height == 58) { return; }
-        this.player.body.height = 92;
-        this.player.body.offset.y = 0;
-      }
-    })*/
   }
 
   placeObsticle() {
