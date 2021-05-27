@@ -166,7 +166,6 @@ class PlayScene extends Phaser.Scene {
       this.player.body.offset.y = 0;
       this.player.setVelocityY(-2600);
       jumpTime = 1;
-      //setTimeout(() => {this.player.body.height = 92; this.player.body.offset.y = 0}, 350);
     })
 
     this.input.keyboard.on('keyup_SPACE', () => {
@@ -184,28 +183,6 @@ class PlayScene extends Phaser.Scene {
     this.input.keyboard.on('keyup_DOWN', () => {
       downTime = 0;
     })
-
-    /*this.time.addEvent({
-      delay: 450,
-      loop: true,
-      callbackScope: this,
-      callback: () => {
-        if (!this.player.body.height == 91) { return; }
-        this.player.body.height = 92;
-        this.player.body.offset.y = 0;
-      }
-    })*/
-
-    /*this.time.addEvent({
-      delay: 300,
-      loop: true,
-      callbackScope: this,
-      callback: () => {
-        if (!this.player.body.height == 58) { return; }
-        this.player.body.height = 92;
-        this.player.body.offset.y = 0;
-      }
-    })*/
   }
 
   placeObsticle() {
@@ -219,13 +196,13 @@ class PlayScene extends Phaser.Scene {
       obsticle.play('enemy--spe1', 1);
       obsticle.body.height = 110;
       obsticle.body.width = 85;
+      console.log(obsticle);
     } else {
       obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], `enemy${obsticleNum}`);
       obsticle.play(`enemy${obsticleNum}`, 1);
       obsticle.body.height = 70;
       obsticle.body.width = 60;
     }
-
     obsticle.setImmovable();
   }
 
@@ -268,7 +245,9 @@ class PlayScene extends Phaser.Scene {
     })
 
     function killenemies(player, obsticle) {
-      if (!this.player.body.offset.y == 0 || this.player.body.onFloor() == false) {
+      if (this.player.body.onFloor() == false && obsticle.y == 370) {
+        obsticle.destroy();
+      } else if (!this.player.body.offset.y == 0 && obsticle.y == 600) {
         obsticle.destroy();
       }
     }
