@@ -184,13 +184,13 @@ class PlayScene extends Phaser.Scene {
       obsticle.play('enemy--spe1', 1);
       obsticle.body.height = 110;
       obsticle.body.width = 85;
+      console.log(obsticle);
     } else {
       obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], `enemy${obsticleNum}`);
       obsticle.play(`enemy${obsticleNum}`, 1);
       obsticle.body.height = 70;
       obsticle.body.width = 60;
     }
-
     obsticle.setImmovable();
   }
 
@@ -217,7 +217,9 @@ class PlayScene extends Phaser.Scene {
     })
 
     function killenemies(player, obsticle) {
-      if (!this.player.body.offset.y == 0 || this.player.body.onFloor() == false) {
+      if (this.player.body.onFloor() == false && obsticle.y == 370) {
+        obsticle.destroy();
+      } else if (!this.player.body.offset.y == 0 && obsticle.y == 600) {
         obsticle.destroy();
       }
     }
