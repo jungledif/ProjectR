@@ -43,7 +43,7 @@ class PreloadScene extends Phaser.Scene {
     })
 
     this.load.spritesheet('enemy-spe1', './krugs.png', {
-      frameWidth: 93,
+      frameWidth: 95,
       frameHeight: 110
     })
 

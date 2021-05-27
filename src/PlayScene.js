@@ -20,7 +20,7 @@ class PlayScene extends Phaser.Scene {
     this.platforms.create(400, 690, 'groundinvi').setScale(2).refreshBody();
     this.platforms.create(400, 245, 'groundinvi').setScale(2).refreshBody();
 
-    this.player = this.physics.add.sprite(100, 400, 'perso').setCollideWorldBounds(true).setGravityY(5000);
+    this.player = this.physics.add.sprite(100, 400, 'perso').setCollideWorldBounds(true).setGravityY(8000);
 
     this.scoreText = this.add.text(width, 0, "00000", { fill: "#ffffff", font: '900 35px Courier', resolution: 5 })
       .setOrigin(1, 0)
@@ -146,15 +146,15 @@ class PlayScene extends Phaser.Scene {
 
     var jumpTime = 0;
     var downTime = 0;
-    var action = null;
     var currentGameSpeed = 0;
 
     this.input.keyboard.on('keydown_SPACE', () => {
       if (!jumpTime == 0) { return; }
       this.player.body.height = 92;
       this.player.body.offset.y = 0;
-      this.player.setVelocityY(-1600);
+      this.player.setVelocityY(-2600);
       jumpTime = 1;
+      //setTimeout(() => {this.player.body.height = 92; this.player.body.offset.y = 0}, 350);
     })
 
     this.input.keyboard.on('keyup_SPACE', () => {
@@ -166,14 +166,26 @@ class PlayScene extends Phaser.Scene {
       this.player.body.height = 58;
       this.player.body.offset.y = 34;
       downTime = 1;
+      setTimeout(() => {this.player.body.height = 92; this.player.body.offset.y = 0}, 100);
     })
 
     this.input.keyboard.on('keyup_DOWN', () => {
       downTime = 0;
     })
 
-    this.time.addEvent({
-      delay: 150,
+    /*this.time.addEvent({
+      delay: 450,
+      loop: true,
+      callbackScope: this,
+      callback: () => {
+        if (!this.player.body.height == 91) { return; }
+        this.player.body.height = 92;
+        this.player.body.offset.y = 0;
+      }
+    })*/
+
+    /*this.time.addEvent({
+      delay: 300,
       loop: true,
       callbackScope: this,
       callback: () => {
@@ -181,7 +193,7 @@ class PlayScene extends Phaser.Scene {
         this.player.body.height = 92;
         this.player.body.offset.y = 0;
       }
-    })
+    })*/
   }
 
   placeObsticle() {
@@ -228,7 +240,9 @@ class PlayScene extends Phaser.Scene {
     })
 
     function killenemies(player, obsticle) {
-      obsticle.destroy();
+      if (!this.player.body.offset.y == 0 || this.player.body.onFloor() == false) {
+        obsticle.destroy();
+      }
     }
 
     if (this.player.body.onFloor() == false) {
