@@ -12,6 +12,7 @@ class PlayScene extends Phaser.Scene {
     this.isGameRunning = true;
     this.respawnTime = 0;
     this.score = 0;
+    this.timePause = false;
 
     this.add.image(640, 360, 'sky');
 
@@ -160,12 +161,15 @@ class PlayScene extends Phaser.Scene {
       }
     }, this);
 
+
     this.input.keyboard.on('keydown_SPACE', () => {
-      if (!jumpTime == 0) { return; }
-      this.player.body.height = 92;
-      this.player.body.offset.y = 0;
-      this.player.setVelocityY(-2600);
-      jumpTime = 1;
+      if (this.timePause == false) {
+        if (!jumpTime == 0) { return; }
+        this.player.body.height = 92;
+        this.player.body.offset.y = 0;
+        this.player.setVelocityY(-2600);
+        jumpTime = 1;
+      }
     })
 
     this.input.keyboard.on('keyup_SPACE', () => {
@@ -173,11 +177,13 @@ class PlayScene extends Phaser.Scene {
     })
 
     this.input.keyboard.on('keydown_DOWN', () => {
-      if (!downTime == 0) { return; }
-      this.player.body.height = 58;
-      this.player.body.offset.y = 34;
-      downTime = 1;
-      setTimeout(() => { this.player.body.height = 92; this.player.body.offset.y = 0 }, 100);
+      if (this.timePause == false) {
+        if (!downTime == 0) { return; }
+        this.player.body.height = 58;
+        this.player.body.offset.y = 34;
+        downTime = 1;
+        setTimeout(() => { this.player.body.height = 92; this.player.body.offset.y = 0 }, 100);
+      }
     })
 
     this.input.keyboard.on('keyup_DOWN', () => {
