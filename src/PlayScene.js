@@ -32,6 +32,14 @@ class PlayScene extends Phaser.Scene {
 
     this.obsticles = this.physics.add.group();
 
+    this.timeText = this.add.text(1100, 20, '', { font: '30px Roboto', fill: '#00ff00' });
+    this.textVies = this.add.text(1100, 50, '', { font: '30px Roboto', fill: '#00ff00' });
+    this.textVitesse = this.add.text(1100, 80, '', { font: '30px Roboto', fill: '#00ff00' });
+    this.vies = this.data.set('vies', 3);
+    this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true });
+    this.minute = 0;
+    this.seconde = 0;
+
     this.initAnims();
     this.initColliders();
     this.handleInputs();
@@ -102,7 +110,7 @@ class PlayScene extends Phaser.Scene {
         if (!this.isGameRunning) { return; }
 
         this.score++;
-        this.gameSpeed += 0.01
+        this.gameSpeed += 0.02
 
         if (this.score % 100 === 0) {
           //this.reachSound.play();
@@ -127,26 +135,30 @@ class PlayScene extends Phaser.Scene {
   }
 
   handleInputs() {
+
+    let jumpTime = 0;
+    let downTime = 0;
+    let currentGameSpeed = 0;
+
     this.input.keyboard.on('keydown_ESC', function () {
       if (this.anims.paused) {
         this.anims.resumeAll();
         // this.gameSpeed = 6;
         this.gameSpeed = currentGameSpeed;
         this.isGameRunning = true;
+        this.timePause = false;
       }
       else {
         this.anims.pauseAll();
-        this.ground.tilePositionX = 0;
+        // this.ground.tilePositionX = 0;
         this.isGameRunning = false;
         // this.gameSpeed = 0;
         currentGameSpeed = this.gameSpeed;
         this.gameSpeed = 0;
+        this.timePause = true;
+
       }
     }, this);
-
-    var jumpTime = 0;
-    var downTime = 0;
-    var currentGameSpeed = 0;
 
     this.input.keyboard.on('keydown_SPACE', () => {
       if (!jumpTime == 0) { return; }
@@ -166,7 +178,7 @@ class PlayScene extends Phaser.Scene {
       this.player.body.height = 58;
       this.player.body.offset.y = 34;
       downTime = 1;
-      setTimeout(() => {this.player.body.height = 92; this.player.body.offset.y = 0}, 100);
+      setTimeout(() => { this.player.body.height = 92; this.player.body.offset.y = 0 }, 100);
     })
 
     this.input.keyboard.on('keyup_DOWN', () => {
@@ -217,10 +229,25 @@ class PlayScene extends Phaser.Scene {
     obsticle.setImmovable();
   }
 
+  onEvent() {
+    !this.timePause ? this.seconde++ : 0;
+
+    // if (this.loopSeconde() == true) { this.gameSpeed++ };
+
+    if (this.seconde > 59) {
+      this.minute++;
+      this.seconde = 0;
+    }
+  }
+
   update(time, delta) {
 
     this.ground.tilePositionX += this.gameSpeed;
     Phaser.Actions.IncX(this.obsticles.getChildren(), -this.gameSpeed);
+
+    this.timeText.setText('Temps : ' + this.minute + " : " + this.seconde);
+    this.textVies.setText('Vies : ' + this.data.get('vies'));
+    this.textVitesse.setText('Vitesse : ' + Math.trunc(this.gameSpeed));
 
     this.respawnTime += delta * this.gameSpeed * 0.08;
     if (this.respawnTime >= 700) {
@@ -231,6 +258,7 @@ class PlayScene extends Phaser.Scene {
     this.obsticles.getChildren().forEach(obsticle => {
       if (obsticle.getBounds().right < 0) {
         obsticle.destroy();
+        this.vies = this.data.set('vies', this.data.get('vies') - 1);
       }
     })
 
