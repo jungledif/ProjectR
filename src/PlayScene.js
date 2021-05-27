@@ -22,19 +22,19 @@ class PlayScene extends Phaser.Scene {
 
     this.player = this.physics.add.sprite(100, 400, 'perso').setCollideWorldBounds(true).setGravityY(8000);
 
-    this.scoreText = this.add.text(width, 0, "00000", { fill: "#ffffff", font: '900 35px Courier', resolution: 5 })
-      .setOrigin(1, 0)
-      .setAlpha(1);
+    this.scoreText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' })
+    // .setOrigin(1, 0)
+    // .setAlpha(1);
 
-    this.highScoreText = this.add.text(0, 0, "00000", { fill: "#535353", font: '900 35px Courier', resolution: 5 })
-      .setOrigin(1, 0)
-      .setAlpha(0);
+    this.highScoreText = this.add.text(1050, 0, '', { fill: "#535353", font: '900 35px Roboto' })
+    // .setOrigin(1, 0)
+    // .setAlpha(0);
 
     this.obsticles = this.physics.add.group();
 
-    this.timeText = this.add.text(1100, 20, '', { font: '30px Roboto', fill: '#00ff00' });
-    this.textVies = this.add.text(1100, 50, '', { font: '30px Roboto', fill: '#00ff00' });
-    this.textVitesse = this.add.text(1100, 80, '', { font: '30px Roboto', fill: '#00ff00' });
+    this.timeText = this.add.text(1050, 30, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textVies = this.add.text(1050, 60, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textVitesse = this.add.text(1050, 90, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.vies = this.data.set('vies', 3);
     this.timedEvent = this.time.addEvent({ delay: 1000, callback: this.onEvent, callbackScope: this, loop: true });
     this.minute = 0;
@@ -129,7 +129,7 @@ class PlayScene extends Phaser.Scene {
           score.unshift(0);
         }
 
-        this.scoreText.setText(score.join(''));
+        this.scoreText.setText('Score: ' + score.join(''));
       }
     })
   }
