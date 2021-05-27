@@ -130,18 +130,25 @@ class PlayScene extends Phaser.Scene {
     this.input.keyboard.on('keydown_ESC', function () {
       if (this.anims.paused) {
         this.anims.resumeAll();
-        this.gameSpeed = 6;
+        // this.gameSpeed = 6;
+        this.gameSpeed = currentGameSpeed;
+        this.isGameRunning = true;
       }
       else {
         this.anims.pauseAll();
         this.ground.tilePositionX = 0;
+        this.isGameRunning = false;
+        // this.gameSpeed = 0;
+        currentGameSpeed = this.gameSpeed;
         this.gameSpeed = 0;
+        console.log(this.gameSpeed);
       }
     }, this);
 
     var jumpTime = 0;
     var downTime = 0;
     var action = null;
+    var currentGameSpeed = 0;
 
     this.input.keyboard.on('keydown_SPACE', () => {
       if (!jumpTime == 0) { return; }
