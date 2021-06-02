@@ -8,9 +8,10 @@ class PreloadScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('sky', './sky.png');
-    this.load.image('ground', './groundmvp.png');
+    this.load.image('sky', './skyy.png');
+    this.load.image('ground', './ground.png');
     this.load.image('groundinvi', './groundinvi.png');
+    this.load.image('background', './background.png');
 
     this.load.spritesheet('perso', './perso-run.png', {
       frameWidth: 88,

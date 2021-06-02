@@ -5,6 +5,7 @@ class PlayScene extends Phaser.Scene {
   constructor() {
     super('PlayScene');
     this.gameSpeed = 6;
+    this.backgroundSpeed = 2;
     this.isGameRunning = true;
     this.respawnTime = 0;
     this.score = 0;
@@ -19,6 +20,7 @@ class PlayScene extends Phaser.Scene {
     this.enemyDead = this.data.set('kill', 0);
 
     this.add.image(640, 360, 'sky');
+    this.background = this.add.tileSprite(0, height, width, 720, 'background').setOrigin(0, 1);
     this.ground = this.add.tileSprite(0, height, width, 170, 'ground').setOrigin(0, 1);
     this.platforms = this.physics.add.staticGroup();
     this.platforms.create(400, 690, 'groundinvi').setScale(2).refreshBody();
@@ -110,7 +112,6 @@ class PlayScene extends Phaser.Scene {
     })
   }
 
-
   handleInputs() {
 
     let jumpTime = 0;
@@ -121,12 +122,14 @@ class PlayScene extends Phaser.Scene {
       if (this.anims.paused) {
         this.anims.resumeAll();
         // this.gameSpeed = 6;
+        this.backgroundSpeed = 2;
         this.gameSpeed = currentGameSpeed;
         this.isGameRunning = true;
         this.timePause = false;
       }
       else {
         this.anims.pauseAll();
+        this.backgroundSpeed = 0;
         // this.ground.tilePositionX = 0;
         this.isGameRunning = false;
         // this.gameSpeed = 0;
@@ -136,7 +139,6 @@ class PlayScene extends Phaser.Scene {
 
       }
     }, this);
-
 
     this.input.keyboard.on('keydown_SPACE', () => {
       if (this.timePause == false) {
@@ -223,6 +225,7 @@ class PlayScene extends Phaser.Scene {
   update(time, delta) {
 
     this.ground.tilePositionX += this.gameSpeed;
+    this.background.tilePositionX += this.backgroundSpeed;
     Phaser.Actions.IncX(this.obsticles.getChildren(), -this.gameSpeed);
     this.displayText();
 
