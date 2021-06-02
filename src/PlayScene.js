@@ -4,10 +4,6 @@ class PlayScene extends Phaser.Scene {
 
   constructor() {
     super('PlayScene');
-  }
-
-  create() {
-    const { height, width } = this.game.config;
     this.gameSpeed = 6;
     this.isGameRunning = true;
     this.respawnTime = 0;
@@ -15,6 +11,10 @@ class PlayScene extends Phaser.Scene {
     this.timePause = false;
     this.minute = 0;
     this.seconde = 0;
+  }
+
+  create() {
+    const { height, width } = this.game.config;
     this.vies = this.data.set('vies', 3);
     this.enemyDead = this.data.set('kill', 0);
 
