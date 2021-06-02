@@ -16,6 +16,7 @@ class PlayScene extends Phaser.Scene {
     this.minute = 0;
     this.seconde = 0;
     this.vies = this.data.set('vies', 3);
+    this.enemyDead = this.data.set('kill', 0);
 
     this.add.image(640, 360, 'sky');
     this.ground = this.add.tileSprite(0, height, width, 170, 'ground').setOrigin(0, 1);
@@ -43,6 +44,7 @@ class PlayScene extends Phaser.Scene {
     this.timeText = this.add.text(1050, 30, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textVies = this.add.text(1050, 60, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textVitesse = this.add.text(1050, 90, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textEnemyDead = this.add.text(1050, 120, '', { font: '900 35px Roboto', fill: '#ffffff' });
   }
 
   displayText() {
@@ -50,6 +52,7 @@ class PlayScene extends Phaser.Scene {
     this.timeText.setText('Temps : ' + this.minute + " : " + this.seconde);
     this.textVies.setText('Vies : ' + this.data.get('vies'));
     this.textVitesse.setText('Vitesse : ' + Math.trunc(this.gameSpeed));
+    this.textEnemyDead.setText('Kills : ' + this.data.get('kill'));
   }
 
   initColliders() {
@@ -244,8 +247,10 @@ class PlayScene extends Phaser.Scene {
     function killenemies(player, obsticle) {
       if (this.player.body.onFloor() == false && obsticle.y == 370) {
         obsticle.destroy();
+        this.enemyDead = this.data.set('kill', this.data.get('kill') + 1);
       } else if (!this.player.body.offset.y == 0 && obsticle.y == 600) {
         obsticle.destroy();
+        this.enemyDead = this.data.set('kill', this.data.get('kill') + 1);
       }
     }
 
