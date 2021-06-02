@@ -27,12 +27,15 @@ class PlayScene extends Phaser.Scene {
     this.platforms.create(400, 245, 'groundinvi').setScale(2).refreshBody();
     this.player = this.physics.add.sprite(100, 400, 'perso').setCollideWorldBounds(true).setGravityY(8000);
     this.obsticles = this.physics.add.group();
-
     this.initTimeEvent();
     this.initText();
     this.initAnims();
     this.initColliders();
     this.handleInputs();
+
+    this.textGameOver.visible = false;
+    this.textResumeGame.visible = false;
+
   }
 
   initTimeEvent() {
@@ -47,6 +50,8 @@ class PlayScene extends Phaser.Scene {
     this.textVies = this.add.text(1050, 60, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textVitesse = this.add.text(1050, 90, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textEnemyDead = this.add.text(1050, 120, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textGameOver = this.add.text(300, 260, '', { font: '900 100px Roboto', fill: '#000000' });
+    this.textResumeGame = this.add.text(300, 360, '', { font: '900 70px Roboto', fill: '#ffffff' });
   }
 
   displayText() {
@@ -55,6 +60,8 @@ class PlayScene extends Phaser.Scene {
     this.textVies.setText('Vies : ' + this.data.get('vies'));
     this.textVitesse.setText('Vitesse : ' + Math.trunc(this.gameSpeed));
     this.textEnemyDead.setText('Kills : ' + this.data.get('kill'));
+    this.textGameOver.setText('GAME OVER');
+    this.textResumeGame.setText('Votre score est de : ' + this.score + '\nVous avez tué ' + this.data.get('kill') + ' ennemies\nen ' + this.minute + " minutes et " + this.seconde + ' secondes !');
   }
 
   initColliders() {
@@ -111,6 +118,7 @@ class PlayScene extends Phaser.Scene {
       repeat: -1
     })
   }
+
 
   handleInputs() {
 
@@ -263,6 +271,22 @@ class PlayScene extends Phaser.Scene {
       this.player.body.height <= 58 ?
         this.player.anims.play('down', true) :
         this.player.anims.play('running', true);
+    }
+
+    if (this.data.get('vies') == 0) {
+      this.anims.pauseAll();
+      this.isGameRunning = false;
+      this.backgroundSpeed = 0;
+      this.gameSpeed = 0;
+      this.timePause = true;
+
+      this.textGameOver.visible = true;
+      this.textResumeGame.visible = true;
+      this.textVies.visible = false;
+      this.textVitesse.visible = false;
+      this.scoreText.visible = false;
+      this.timeText.visible = false;
+      this.textEnemyDead.visible = false;
     }
   }
 }
