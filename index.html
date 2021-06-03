@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="fr">
 
@@ -5,6 +6,9 @@
     <meta charset="UTF-8" />
     <title>Un premier jeu Phaser 3.0 </title>
     <script src="phaser.js"></script>
+    <!-- MIDI - MIDI PARSER JS-->  
+     <!-- <script src="https://colxi.info/midi-parser-js/src/main.js"></script> -->
+    
     <style type="text/css">
         body {
             margin: 0;
@@ -13,8 +17,32 @@
 </head>
 
 <body>
-    <script src=»//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js »></script>
-    <script type="text/javascript">
+
+    <!-- AUDIO - HOWLER-->
+    <button type="button" id="button" style="visibility: hidden; display: none;">play</button>
+    <script src="node_modules/howler/dist/howler.js"></script>
+    <script src="audio1.js"></script>
+
+    <script src="https://unpkg.com/@tonejs/midi"></script>
+    <script type="module" src="./midi-parser2.mjs"></script>
+    
+     <div id="partition" style="position: absolute;top: 0;  width: 27058px;background-color: aqua; height: 415px;" >
+        <div id="D" style="width: 100%;background-color: rgba(0,0,0,0); height: 50px;border: 1px solid red;display: flex;flex-direction: row;"></div>
+        <div id="E" style="width: 100%;background-color: rgba(0,0,0,0); height: 50px;border: 1px solid blue;display: flex;flex-direction: row;"></div>
+        <div id="F" style="width: 100%;background-color: rgba(0,0,0,0); height: 50px;border: 1px solid green;display: flex;flex-direction: row;"></div>
+        <div id="G" style="width: 100%;background-color: rgba(0,0,0,0); height: 50px;border: 1px solid black;display: flex;flex-direction: row;"></div>
+        <div  id="A" style="width: 100%;background-color: rgba(0,0,0,0); height: 50px;border: 1px solid red;display: flex;flex-direction: row;"></div>
+        <div id="B" style="width: 100%;background-color: rgba(0,0,0,0); height: 50px;border: 1px solid blue;display: flex;flex-direction: row;"></div>
+        <div id="C" style="width: 100%;background-color: rgba(0,0,0,0); height: 50px;border: 1px solid green;display: flex;flex-direction: row;"></div>
+        <div id="F2" style="width: 100%;background-color: rgba(0,0,0,0); height: 50px;border: 1px solid black;display: flex;flex-direction: row;"></div>      
+        <div id="D2" style="width: 100%;background-color: rgba(0,0,0,0); height: 50px;border: 1px solid black;display: flex;flex-direction: row;"></div>      
+
+    </div>
+     <div #screen style="position: absolute;top: 0;left: 200px; width: 1200px;height: 415px; border: 1px solid black;background-color: rgba(0,0,0,0);"></div>
+    <!-- GAME -->
+    <!-- //pas besoin d'importer ça, on a déjà le JS en dur, ça créer des erreurs console pour double import -->
+    <!-- <script src=»//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js »></script> -->
+    <!-- <script type="text/javascript">
         var config = {
             type: Phaser.AUTO,
             width: 1280,
@@ -39,6 +67,9 @@
             this.load.image('sky', 'assets/sky.png');
             this.load.image('ground', 'assets/groundmvp.png');
             this.load.image('groundinvi', 'assets/groundinvi.png');
+            this.load.image('obstacle1', 'assets/star.png');
+            this.load.image('obstacle2', 'assets/star.png');
+
 
             this.load.spritesheet('perso', 'assets/perso-run.png', {
                 frameWidth: 88,
@@ -65,6 +96,11 @@
 
             this.ground = this.add.tileSprite(0, height, width, 170, 'ground').setOrigin(0, 1);
 
+            //obstacle - notes
+            this.obstacle1 = this.physics.add.sprite(680, 370, 'obstacle1');
+            this.obstacle2 = this.physics.add.sprite(640, 580, 'obstacle2');
+
+
             // var platforms;
             platforms = this.physics.add.staticGroup();
             platforms.create(400, 680, 'groundinvi').setScale(2).refreshBody();
@@ -77,7 +113,8 @@
             this.physics.add.collider(player, platforms);
 
             // console.log(this.physics.add.collider(player, platforms))
-
+            
+            
             this.anims.create({
                 key: 'running',
                 frames: this.anims.generateFrameNumbers('perso', { start: 0, end: 15 }),
@@ -134,6 +171,8 @@
 
         function update() {
             this.ground.tilePositionX += this.gameSpeed;
+            this.obstacle1.x -= this.gameSpeed;
+            this.obstacle2.x -= this.gameSpeed;
 
             if (player.body.deltaAbsY() > 0) {
                 player.anims.play('jump', true);
@@ -143,7 +182,9 @@
                     player.anims.play('running', true);
             }
         }
-    </script>
+    </script> -->
+
+
 </body>
 
 </html>
