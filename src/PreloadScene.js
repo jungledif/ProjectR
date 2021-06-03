@@ -13,6 +13,14 @@ class PreloadScene extends Phaser.Scene {
     this.load.image('groundinvi', './groundinvi.png');
     this.load.image('background', './background.png');
 
+    this.load.audio('hit', ['./audio/hit.mp3']);
+    this.load.audio('end', ['./audio/end.mp3']);
+    this.load.audio('hit2', ['./audio/hit2.mp3']);
+    this.load.audio('jump', ['./audio/jump.mp3']);
+    this.load.audio('end2', ['./audio/end2.mp3']);
+    this.load.audio('pause', ['./audio/pause.mp3']);
+    this.load.audio('gogogo', ['./audio/gogogo.mp3']);
+
     this.load.spritesheet('perso', './perso-run.png', {
       frameWidth: 88,
       frameHeight: 94
@@ -47,14 +55,6 @@ class PreloadScene extends Phaser.Scene {
       frameWidth: 95,
       frameHeight: 110
     })
-
-    this.load.audio('hit', ['./audio/hit.mp3']);
-    this.load.audio('hit2', ['./audio/hit2.mp3']);
-    this.load.audio('jump', ['./audio/jump.mp3']);
-    this.load.audio('gogogo', ['./audio/gogogo.mp3']);
-    this.load.audio('end', ['./audio/end.mp3']);
-    this.load.audio('end2', ['./audio/end2.mp3']);
-    this.load.audio('pause', ['./audio/pause.mp3']);
   }
 
   create() {

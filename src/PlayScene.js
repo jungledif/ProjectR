@@ -233,8 +233,6 @@ class PlayScene extends Phaser.Scene {
     this.gameSpeed += 0.02
 
     if (this.score % 100 === 0) {
-      //this.reachSound.play();
-
       this.tweens.add({
         targets: this.scoreText,
         duration: 100,
