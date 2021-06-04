@@ -56,7 +56,7 @@ class PlayScene extends Phaser.Scene {
     this.scoreText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' });
     this.timeText = this.add.text(1050, 30, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textVies = this.add.text(1050, 60, '', { font: '900 35px Roboto', fill: '#ffffff' });
-    this.textPause = this.add.text(400, 260, '', { font: '900 150px Roboto', fill: '#ffffff' });
+    this.textPause = this.add.text(400, 260, '', { font: '900 150px Roboto', fill: '#ffffff', zIndex: '99' });
     this.textVitesse = this.add.text(1050, 90, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.highScoreText = this.add.text(1050, 0, '', { fill: "#535353", font: '900 35px Roboto' });
     this.textGameOver = this.add.text(300, 260, '', { font: '900 100px Roboto', fill: '#000000' });
@@ -145,6 +145,13 @@ class PlayScene extends Phaser.Scene {
       frameRate: 16,
       repeat: -1
     })
+
+    this.anims.create({
+      key: 'enemy--spe4',
+      frames: this.anims.generateFrameNumbers('enemy-spe4', { start: 0, end: 7 }),
+      frameRate: 16,
+      repeat: -1
+    })
   }
 
   handleInputs() {
@@ -219,11 +226,13 @@ class PlayScene extends Phaser.Scene {
     if (obsticleNum > 3) {
       obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], `enemy-spe1`);
       if (this.score >= 0 && this.score <= 199) {
-        obsticle.play('enemy--spe1', 1);
+        obsticle.play('enemy--spe4', 1);
       }else if (this.score >= 200 && this.score <= 399) {
         obsticle.play('enemy--spe2', 1);
-      }else if (this.score >= 400) {
+      }else if (this.score >= 400 && this.score <= 599) {
         obsticle.play('enemy--spe3', 1);
+      }else if (this.score >= 600) {
+        obsticle.play('enemy--spe1', 1);
       }
       
       obsticle.body.height = 110;
