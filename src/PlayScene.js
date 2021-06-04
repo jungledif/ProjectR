@@ -13,6 +13,7 @@ class PlayScene extends Phaser.Scene {
     this.timePause = false;
     this.minute = 0;
     this.seconde = 0;
+    this.bonusPoint = 10;
   }
 
   create() {
@@ -257,6 +258,14 @@ class PlayScene extends Phaser.Scene {
     }
   }
 
+  bonusPoints() {
+    if (this.data.get('kill') == this.bonusPoint) {
+      this.soundPause.play();
+      this.score += 100;
+      this.bonusPoint += 10;
+    }
+  }
+
   update(time, delta) {
     this.ground.tilePositionX += this.gameSpeed;
     this.background.tilePositionX += this.backgroundSpeed;
@@ -319,6 +328,8 @@ class PlayScene extends Phaser.Scene {
       this.textEnemyDead.visible = false;
       this.data.set('vies', 3);
     }
+
+    this.bonusPoints();
   }
 }
 
