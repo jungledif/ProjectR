@@ -36,6 +36,8 @@ class PreloadScene extends Phaser.Scene {
       frameHeight: 94
     })
 
+    // enemies
+
     this.load.spritesheet('enemy-1', './enemy1.png', {
       frameWidth: 70,
       frameHeight: 80
@@ -51,7 +53,19 @@ class PreloadScene extends Phaser.Scene {
       frameHeight: 80
     })
 
+    // specials enemies
+
     this.load.spritesheet('enemy-spe1', './krugs.png', {
+      frameWidth: 95,
+      frameHeight: 110
+    })
+
+    this.load.spritesheet('enemy-spe2', './soinc.png', {
+      frameWidth: 95,
+      frameHeight: 110
+    })
+
+    this.load.spritesheet('enemy-spe3', './tourelle.png', {
       frameWidth: 95,
       frameHeight: 110
     })

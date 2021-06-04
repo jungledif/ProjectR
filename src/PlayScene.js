@@ -4,7 +4,7 @@ class PlayScene extends Phaser.Scene {
 
   constructor() {
     super('PlayScene');
-    this.gameSpeed = 6;
+    this.gameSpeed = 9;
     this.backgroundSpeed = 2;
     this.isGameRunning = true;
     this.gameOver = false;
@@ -131,8 +131,21 @@ class PlayScene extends Phaser.Scene {
       frameRate: 16,
       repeat: -1
     })
-  }
 
+    this.anims.create({
+      key: 'enemy--spe2',
+      frames: this.anims.generateFrameNumbers('enemy-spe2', { start: 0, end: 7 }),
+      frameRate: 16,
+      repeat: -1
+    })
+
+    this.anims.create({
+      key: 'enemy--spe3',
+      frames: this.anims.generateFrameNumbers('enemy-spe3', { start: 0, end: 7 }),
+      frameRate: 16,
+      repeat: -1
+    })
+  }
 
   handleInputs() {
 
@@ -205,7 +218,14 @@ class PlayScene extends Phaser.Scene {
 
     if (obsticleNum > 3) {
       obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], `enemy-spe1`);
-      obsticle.play('enemy--spe1', 1);
+      if (this.score >= 0 && this.score <= 199) {
+        obsticle.play('enemy--spe1', 1);
+      }else if (this.score >= 200 && this.score <= 399) {
+        obsticle.play('enemy--spe2', 1);
+      }else if (this.score >= 400) {
+        obsticle.play('enemy--spe3', 1);
+      }
+      
       obsticle.body.height = 110;
       obsticle.body.width = 85;
     } else {
@@ -263,7 +283,7 @@ class PlayScene extends Phaser.Scene {
     Phaser.Actions.IncX(this.obsticles.getChildren(), -this.gameSpeed);
     this.displayText();
 
-    this.respawnTime += delta * this.gameSpeed * 0.08;
+    this.respawnTime += delta * this.gameSpeed * 0.06;
     if (this.respawnTime >= 700) {
       this.placeObsticle();
       this.respawnTime = 0;
