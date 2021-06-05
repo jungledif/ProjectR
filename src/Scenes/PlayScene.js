@@ -365,18 +365,18 @@ export class PlayScene extends Phaser.Scene {
         this.player.anims.play('running', true);
     }
 
-    if (this.data.get('vies') == 0) {
-      this.gameOver = true;
-      this.anims.pauseAll();
-      this.randomSound(this.soundEnd, this.soundEnd2);
-      this.isGameRunning = false;
-      this.backgroundSpeed = 0;
-      this.gameSpeed = 0;
-      this.timePause = true;
-      this.textGameOver.visible = true;
-      this.textResumeGame.visible = true;
-      this.data.set('vies', 3);
-    }
+    // if (this.data.get('vies') == 0) {
+    //   this.gameOver = true;
+    //   this.anims.pauseAll();
+    //   this.randomSound(this.soundEnd, this.soundEnd2);
+    //   this.isGameRunning = false;
+    //   this.backgroundSpeed = 0;
+    //   this.gameSpeed = 0;
+    //   this.timePause = true;
+    //   this.textGameOver.visible = true;
+    //   this.textResumeGame.visible = true;
+    //   this.data.set('vies', 3);
+    // }
     this.bonusPoints();
   }
 }

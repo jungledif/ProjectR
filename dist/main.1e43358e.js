@@ -952,20 +952,19 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
         this.player.anims.play('jump', true);
       } else {
         this.player.body.height <= 58 ? this.player.anims.play('down', true) : this.player.anims.play('running', true);
-      }
+      } // if (this.data.get('vies') == 0) {
+      //   this.gameOver = true;
+      //   this.anims.pauseAll();
+      //   this.randomSound(this.soundEnd, this.soundEnd2);
+      //   this.isGameRunning = false;
+      //   this.backgroundSpeed = 0;
+      //   this.gameSpeed = 0;
+      //   this.timePause = true;
+      //   this.textGameOver.visible = true;
+      //   this.textResumeGame.visible = true;
+      //   this.data.set('vies', 3);
+      // }
 
-      if (this.data.get('vies') == 0) {
-        this.gameOver = true;
-        this.anims.pauseAll();
-        this.randomSound(this.soundEnd, this.soundEnd2);
-        this.isGameRunning = false;
-        this.backgroundSpeed = 0;
-        this.gameSpeed = 0;
-        this.timePause = true;
-        this.textGameOver.visible = true;
-        this.textResumeGame.visible = true;
-        this.data.set('vies', 3);
-      }
 
       this.bonusPoints();
     }
@@ -1158,7 +1157,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63105" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60434" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
