@@ -13,6 +13,7 @@ class PlayScene extends Phaser.Scene {
     this.timePause = false;
     this.minute = 0;
     this.seconde = 0;
+    this.bonusPoint = 10;
   }
 
   create() {
@@ -34,6 +35,20 @@ class PlayScene extends Phaser.Scene {
     this.initColliders();
     this.initSound();
     this.handleInputs();
+    this.initIcone();
+  }
+
+  initIcone() {
+    this.iconeScore = this.add.image(30, 30, 'score');
+    this.iconeScore.setScale(2);
+    this.iconeKill = this.add.image(322, 30, 'mort');
+    this.iconeKill.setScale(2);
+    this.iconeTime = this.add.image(614, 30, 'sablier');
+    this.iconeTime.setScale(2);
+    this.iconeSpeed = this.add.image(906, 30, 'botte');
+    this.iconeSpeed.setScale(2);
+    this.iconeVie = this.add.image(1200, 30, 'coeur');
+    this.iconeVie.setScale(2);
   }
 
   initSound() {
@@ -53,14 +68,22 @@ class PlayScene extends Phaser.Scene {
 
   initText() {
 
+<<<<<<< HEAD
     this.scoreText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' });
     this.timeText = this.add.text(1050, 30, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textVies = this.add.text(1050, 60, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textPause = this.add.text(400, 260, '', { font: '900 150px Roboto', fill: '#ffffff', zIndex: '99' });
     this.textVitesse = this.add.text(1050, 90, '', { font: '900 35px Roboto', fill: '#ffffff' });
+=======
+    this.scoreText = this.add.text(60, 15, '', { fill: "#ffffff", font: '900 35px Roboto' });
+    this.timeText = this.add.text(644, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textVies = this.add.text(1230, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textPause = this.add.text(400, 260, '', { font: '900 150px Roboto', fill: '#ffffff' });
+    this.textVitesse = this.add.text(936, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
+>>>>>>> drizix_branch
     this.highScoreText = this.add.text(1050, 0, '', { fill: "#535353", font: '900 35px Roboto' });
     this.textGameOver = this.add.text(300, 260, '', { font: '900 100px Roboto', fill: '#000000' });
-    this.textEnemyDead = this.add.text(1050, 120, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textEnemyDead = this.add.text(352, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textResumeGame = this.add.text(300, 360, '', { font: '900 70px Roboto', fill: '#ffffff' });
     this.textPause.visible = false;
     this.textGameOver.visible = false;
@@ -70,11 +93,11 @@ class PlayScene extends Phaser.Scene {
   displayText() {
     this.textPause.setText('PAUSE');
     this.textGameOver.setText('GAME OVER');
-    this.scoreText.setText('Score: ' + this.score);
-    this.textVies.setText('Vies : ' + this.data.get('vies'));
-    this.textEnemyDead.setText('Kills : ' + this.data.get('kill'));
-    this.textVitesse.setText('Vitesse : ' + Math.trunc(this.gameSpeed));
-    this.timeText.setText('Temps : ' + this.minute + " : " + this.seconde);
+    this.scoreText.setText(this.score);
+    this.textVies.setText(this.data.get('vies'));
+    this.textEnemyDead.setText(this.data.get('kill'));
+    this.textVitesse.setText(Math.trunc(this.gameSpeed));
+    this.timeText.setText(this.minute + " : " + this.seconde);
     this.textResumeGame.setText('Votre score est de : ' + this.score + '\nVous avez tué ' + this.data.get('kill') + ' ennemies\nen ' + this.minute + " minutes et " + this.seconde + ' secondes !');
   }
 
@@ -286,6 +309,14 @@ class PlayScene extends Phaser.Scene {
     }
   }
 
+  bonusPoints() {
+    if (this.data.get('kill') == this.bonusPoint) {
+      this.soundPause.play();
+      this.score += 100;
+      this.bonusPoint += 10;
+    }
+  }
+
   update(time, delta) {
     this.ground.tilePositionX += this.gameSpeed;
     this.background.tilePositionX += this.backgroundSpeed;
@@ -338,16 +369,11 @@ class PlayScene extends Phaser.Scene {
       this.backgroundSpeed = 0;
       this.gameSpeed = 0;
       this.timePause = true;
-
       this.textGameOver.visible = true;
       this.textResumeGame.visible = true;
-      this.textVies.visible = false;
-      this.textVitesse.visible = false;
-      this.scoreText.visible = false;
-      this.timeText.visible = false;
-      this.textEnemyDead.visible = false;
       this.data.set('vies', 3);
     }
+    this.bonusPoints();
   }
 }
 
