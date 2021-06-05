@@ -1,12 +1,12 @@
-import {CST} from "../CST";
+import { CST } from "../CST";
 
 export class PlayScene extends Phaser.Scene {
 
   constructor() {
     super({
       key: CST.SCENES.PLAYSCENE
-  })
- 
+    })
+
   }
 
   create() {
@@ -20,15 +20,15 @@ export class PlayScene extends Phaser.Scene {
     this.minute = 0;
     this.seconde = 0;
     this.bonusPoint = 10;
-   
+
     this.timePause = false;
 
     const { height, width } = this.game.config;
     this.vies = this.data.set('vies', 3);
-   
+
     this.enemyDead = this.data.set('kill', 0);
 
-   this.add.image(640, 360, 'sky');
+    this.add.image(640, 360, 'sky');
     this.background = this.add.tileSprite(0, height, width, 720, 'background').setOrigin(0, 1);
     this.ground = this.add.tileSprite(0, height, width, 170, 'ground').setOrigin(0, 1);
     this.platforms = this.physics.add.staticGroup();
@@ -173,7 +173,7 @@ export class PlayScene extends Phaser.Scene {
       repeat: -1
     })
   }
-  
+
   handleInputs() {
 
     let jumpTime = 0;
@@ -299,7 +299,7 @@ export class PlayScene extends Phaser.Scene {
     }
   }
 
- randomSound(sound1, sound2) {
+  randomSound(sound1, sound2) {
     let randomNumber = Math.floor(Math.random() * 2);
     if (randomNumber == 0) {
       return sound1.play();
@@ -320,7 +320,7 @@ export class PlayScene extends Phaser.Scene {
     if (this.data.get('vies') == 0) {
       this.scene.stop();
       this.scene.start(CST.SCENES.ENDING, this.score);
-     }
+    }
 
     this.ground.tilePositionX += this.gameSpeed;
     this.background.tilePositionX += this.backgroundSpeed;

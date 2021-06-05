@@ -1129,7 +1129,7 @@ var config = {
   }
 };
 new Phaser.Game(config);
-},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../Users/Shirohige/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1157,7 +1157,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "60434" + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60496" + '/');
+>>>>>>> a0e903746c12069f7a662740246a26ec6cd4f8f7
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1333,5 +1337,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../Users/Shirohige/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
+},{}]},{},["../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
 //# sourceMappingURL=/main.1e43358e.js.map
