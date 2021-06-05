@@ -450,7 +450,7 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
         frameWidth: 95,
         frameHeight: 110
       });
-      this.load.spritesheet('enemy-spe4', './claptrap.png', {
+      this.load.spritesheet('enemy-spe4', './assets/image/claptrap.png', {
         frameWidth: 95,
         frameHeight: 110
       });
@@ -708,6 +708,33 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.anims.create({
         key: 'enemy--spe1',
         frames: this.anims.generateFrameNumbers('enemy-spe1', {
+          start: 0,
+          end: 7
+        }),
+        frameRate: 16,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'enemy--spe2',
+        frames: this.anims.generateFrameNumbers('enemy-spe2', {
+          start: 0,
+          end: 7
+        }),
+        frameRate: 16,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'enemy--spe3',
+        frames: this.anims.generateFrameNumbers('enemy-spe3', {
+          start: 0,
+          end: 7
+        }),
+        frameRate: 16,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'enemy--spe4',
+        frames: this.anims.generateFrameNumbers('enemy-spe4', {
           start: 0,
           end: 7
         }),
@@ -1048,7 +1075,7 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
 
         _this.scene.stop();
 
-        _this.scene.start(_CST.CST.SCENES.PRELOAD, _this.score);
+        _this.scene.start(_CST.CST.SCENES.PRELOAD);
       });
       backMenuButton.setInteractive();
       backMenuButton.on("pointerover", function () {

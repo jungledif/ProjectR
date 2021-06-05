@@ -152,8 +152,28 @@ export class PlayScene extends Phaser.Scene {
       frameRate: 16,
       repeat: -1
     })
-  }
+    this.anims.create({
+      key: 'enemy--spe2',
+      frames: this.anims.generateFrameNumbers('enemy-spe2', { start: 0, end: 7 }),
+      frameRate: 16,
+      repeat: -1
+    })
 
+    this.anims.create({
+      key: 'enemy--spe3',
+      frames: this.anims.generateFrameNumbers('enemy-spe3', { start: 0, end: 7 }),
+      frameRate: 16,
+      repeat: -1
+    })
+
+    this.anims.create({
+      key: 'enemy--spe4',
+      frames: this.anims.generateFrameNumbers('enemy-spe4', { start: 0, end: 7 }),
+      frameRate: 16,
+      repeat: -1
+    })
+  }
+  
   handleInputs() {
 
     let jumpTime = 0;
@@ -220,7 +240,7 @@ export class PlayScene extends Phaser.Scene {
   placeObsticle() {
     const obsticleNum = Math.floor(Math.random() * 4) + 1;
     const distance = Phaser.Math.Between(600, 900);
-    let obsticle;
+    var obsticle;
     const enemyHeight = [120, 350];
 
     if (obsticleNum > 3) {

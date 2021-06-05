@@ -60,7 +60,7 @@ export class EndScene extends Phaser.Scene{
     retryButton.on("pointerup", ()=>{
         music.stop();
         this.scene.stop();
-        this.scene.start(CST.SCENES.PRELOAD, this.score);
+        this.scene.start(CST.SCENES.PRELOAD);
         
     })
 

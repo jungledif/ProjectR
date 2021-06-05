@@ -77,7 +77,7 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 110
     })
 
-    this.load.spritesheet('enemy-spe4', './claptrap.png', {
+    this.load.spritesheet('enemy-spe4', './assets/image/claptrap.png', {
       frameWidth: 95,
       frameHeight: 110
     })
