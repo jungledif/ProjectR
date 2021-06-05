@@ -190,8 +190,8 @@ var LoadScene = /*#__PURE__*/function (_Phaser$Scene) {
       var _this = this;
 
       // add logo image
-      this.load.image("title_bg", "./assets/image/background-menu.png");
-      this.load.image("options_button", "./assets/image/options_button1.png");
+      this.load.image("title_bg", "./assets/image/background-menu.png"); //  this.load.image("options_button", "./assets/image/options_button1.png");
+
       this.load.image("play_button", "./assets/image/play_button1.png"); //  this.load.image("logo", "./assets/image/logo.png");
 
       this.load.image("back_menu_button", "./assets/image/backtomenu.png");
@@ -288,8 +288,8 @@ var MenuScene = /*#__PURE__*/function (_Phaser$Scene) {
       // this.add.image(this.game.renderer.width / 2.35, this.game.renderer.height * 0.20, "logo").setDepth(1);
       this.add.image(0, 0, "title_bg").setOrigin(0); // Audio menu 
 
-      var playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 1.5, "play_button").setDepth(1);
-      var optionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 1.5 + 100, "options_button").setDepth(1);
+      var playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 1.5 + 100, "play_button").setDepth(1); //    let optionButton = this.add.image(this.game.renderer.width /2, this.game.renderer.height / 1.5 + 100, "options_button").setDepth(1);
+
       var music = this.sound.add("title_music", {
         loop: true
       }); //    this.sound.play("title_music");
@@ -326,22 +326,20 @@ var MenuScene = /*#__PURE__*/function (_Phaser$Scene) {
         _this.scene.start(_CST.CST.SCENES.PRELOAD);
 
         _this.scene.launch();
-      });
-      optionButton.setInteractive();
-      optionButton.on("pointerover", function () {
-        hoverSprite.setVisible(true);
-        hoverSprite.play("walk");
-        hoverSprite.x = optionButton.x - optionButton.width;
-        hoverSprite.y = optionButton.y;
-      });
-      optionButton.on("pointerout", function () {
-        hoverSprite.setVisible(false);
-      });
-      optionButton.on("pointerup", function () {
-        _this.scene.start(_CST.CST.SCENES.ENDING);
-
-        _this.scene.launch();
-      });
+      }); // optionButton.setInteractive();
+      // optionButton.on("pointerover", ()=>{
+      //     hoverSprite.setVisible(true);
+      //     hoverSprite.play("walk");
+      //     hoverSprite.x = optionButton.x - optionButton.width;
+      //     hoverSprite.y = optionButton.y;
+      // })
+      // optionButton.on("pointerout", ()=>{
+      //     hoverSprite.setVisible(false);
+      // })
+      // optionButton.on("pointerup", ()=>{
+      //     this.scene.start();
+      //     this.scene.launch();
+      // })
     }
   }]);
 
@@ -402,6 +400,18 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.load.image('ground', './assets/image/ground.png');
       this.load.image('groundinvi', './assets/image/groundinvi.png');
       this.load.image('background', './assets/image/background.png');
+      this.load.audio('hit', ['./assets/audio/hit.mp3']);
+      this.load.audio('end', ['./assets/audio/end.mp3']);
+      this.load.audio('hit2', ['./assets/audio/hit2.mp3']);
+      this.load.audio('jump', ['./assets/audio/jump.mp3']);
+      this.load.audio('end2', ['./assets/audio/end2.mp3']);
+      this.load.audio('pause', ['./assets/audio/pause.mp3']);
+      this.load.audio('gogogo', ['./assets/audio/gogogo.mp3']);
+      this.load.image('sablier', './assets/image/sablier.png');
+      this.load.image('mort', './assets/image/mort.png');
+      this.load.image('coeur', './assets/image/coeur.png');
+      this.load.image('botte', './assets/image/botte.png');
+      this.load.image('score', './assets/image/score.png');
       this.load.spritesheet('perso', './assets/image/perso-run.png', {
         frameWidth: 88,
         frameHeight: 94
@@ -413,7 +423,8 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.load.spritesheet('perso-up', './assets/image/perso-jump.png', {
         frameWidth: 88,
         frameHeight: 94
-      });
+      }); // enemies
+
       this.load.spritesheet('enemy-1', './assets/image/enemy1.png', {
         frameWidth: 70,
         frameHeight: 80
@@ -425,8 +436,21 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.load.spritesheet('enemy-3', './assets/image/enemy3.png', {
         frameWidth: 70,
         frameHeight: 80
-      });
+      }); // specials enemies
+
       this.load.spritesheet('enemy-spe1', './assets/image/krugs.png', {
+        frameWidth: 95,
+        frameHeight: 110
+      });
+      this.load.spritesheet('enemy-spe2', './assets/image/soinc.png', {
+        frameWidth: 95,
+        frameHeight: 110
+      });
+      this.load.spritesheet('enemy-spe3', './assets/image/tourelle.png', {
+        frameWidth: 95,
+        frameHeight: 110
+      });
+      this.load.spritesheet('enemy-spe4', './claptrap.png', {
         frameWidth: 95,
         frameHeight: 110
       });
@@ -481,27 +505,27 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
   var _super = _createSuper(PlayScene);
 
   function PlayScene() {
-    var _this;
-
     _classCallCheck(this, PlayScene);
 
-    _this = _super.call(this, {
+    return _super.call(this, {
       key: _CST.CST.SCENES.PLAYSCENE
     });
-    _this.gameSpeed = 6;
-    _this.backgroundSpeed = 2;
-    _this.isGameRunning = true;
-    _this.respawnTime = 0;
-    _this.timePause = false;
-    _this.minute = 0;
-    _this.seconde = 0;
-    return _this;
   }
 
   _createClass(PlayScene, [{
     key: "create",
     value: function create() {
+      this.gameSpeed = 9;
+      this.backgroundSpeed = 2;
+      this.isGameRunning = true;
+      this.gameOver = false;
+      this.respawnTime = 0;
       this.score = 0;
+      this.timePause = false;
+      this.minute = 0;
+      this.seconde = 0;
+      this.bonusPoint = 10;
+      this.timePause = false;
       var _this$game$config = this.game.config,
           height = _this$game$config.height,
           width = _this$game$config.width;
@@ -519,7 +543,34 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.initText();
       this.initAnims();
       this.initColliders();
+      this.initSound();
       this.handleInputs();
+      this.initIcone();
+    }
+  }, {
+    key: "initIcone",
+    value: function initIcone() {
+      this.iconeScore = this.add.image(30, 30, 'score');
+      this.iconeScore.setScale(2);
+      this.iconeKill = this.add.image(322, 30, 'mort');
+      this.iconeKill.setScale(2);
+      this.iconeTime = this.add.image(614, 30, 'sablier');
+      this.iconeTime.setScale(2);
+      this.iconeSpeed = this.add.image(906, 30, 'botte');
+      this.iconeSpeed.setScale(2);
+      this.iconeVie = this.add.image(1200, 30, 'coeur');
+      this.iconeVie.setScale(2);
+    }
+  }, {
+    key: "initSound",
+    value: function initSound() {
+      this.soundHit = this.sound.add('hit');
+      this.soundEnd = this.sound.add('end');
+      this.soundHit2 = this.sound.add('hit2');
+      this.soundEnd2 = this.sound.add('end2');
+      this.soundJump = this.sound.add('jump');
+      this.soundPause = this.sound.add('pause');
+      this.soundGogogo = this.sound.add('gogogo');
     }
   }, {
     key: "initTimeEvent",
@@ -540,39 +591,57 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
   }, {
     key: "initText",
     value: function initText() {
-      this.scoreText = this.add.text(1050, 0, '', {
+      this.scoreText = this.add.text(60, 15, '', {
         fill: "#ffffff",
         font: '900 35px Roboto'
+      });
+      this.timeText = this.add.text(644, 15, '', {
+        font: '900 35px Roboto',
+        fill: '#ffffff'
+      });
+      this.textVies = this.add.text(1230, 15, '', {
+        font: '900 35px Roboto',
+        fill: '#ffffff'
+      });
+      this.textPause = this.add.text(400, 260, '', {
+        font: '900 150px Roboto',
+        fill: '#ffffff'
+      });
+      this.textVitesse = this.add.text(936, 15, '', {
+        font: '900 35px Roboto',
+        fill: '#ffffff'
       });
       this.highScoreText = this.add.text(1050, 0, '', {
         fill: "#535353",
         font: '900 35px Roboto'
       });
-      this.timeText = this.add.text(1050, 30, '', {
+      this.textGameOver = this.add.text(300, 260, '', {
+        font: '900 100px Roboto',
+        fill: '#000000'
+      });
+      this.textEnemyDead = this.add.text(352, 15, '', {
         font: '900 35px Roboto',
         fill: '#ffffff'
       });
-      this.textVies = this.add.text(1050, 60, '', {
-        font: '900 35px Roboto',
+      this.textResumeGame = this.add.text(300, 360, '', {
+        font: '900 70px Roboto',
         fill: '#ffffff'
       });
-      this.textVitesse = this.add.text(1050, 90, '', {
-        font: '900 35px Roboto',
-        fill: '#ffffff'
-      });
-      this.textEnemyDead = this.add.text(1050, 120, '', {
-        font: '900 35px Roboto',
-        fill: '#ffffff'
-      });
+      this.textPause.visible = false;
+      this.textGameOver.visible = false;
+      this.textResumeGame.visible = false;
     }
   }, {
     key: "displayText",
     value: function displayText() {
-      this.scoreText.setText('Score: ' + this.score);
-      this.timeText.setText('Temps : ' + this.minute + " : " + this.seconde);
-      this.textVies.setText('Vies : ' + this.data.get('vies'));
-      this.textVitesse.setText('Vitesse : ' + Math.trunc(this.gameSpeed));
-      this.textEnemyDead.setText('Kills : ' + this.data.get('kill'));
+      this.textPause.setText('PAUSE');
+      this.textGameOver.setText('GAME OVER');
+      this.scoreText.setText(this.score);
+      this.textVies.setText(this.data.get('vies'));
+      this.textEnemyDead.setText(this.data.get('kill'));
+      this.textVitesse.setText(Math.trunc(this.gameSpeed));
+      this.timeText.setText(this.minute + " : " + this.seconde);
+      this.textResumeGame.setText('Votre score est de : ' + this.score + '\nVous avez tué ' + this.data.get('kill') + ' ennemies\nen ' + this.minute + " minutes et " + this.seconde + ' secondes !');
     }
   }, {
     key: "initColliders",
@@ -647,80 +716,48 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       });
     }
   }, {
-    key: "handleScore",
-    value: function handleScore() {
-      var _this2 = this;
-
-      this.time.addEvent({
-        delay: 1000 / 10,
-        loop: true,
-        callbackScope: this,
-        callback: function callback() {
-          if (!_this2.isGameRunning) {
-            return;
-          }
-
-          _this2.score++;
-          _this2.gameSpeed += 0.01;
-
-          if (_this2.score % 100 === 0) {
-            //this.reachSound.play();
-            _this2.tweens.add({
-              targets: _this2.scoreText,
-              duration: 100,
-              repeat: 3,
-              alpha: 0,
-              yoyo: true
-            });
-          }
-
-          var score = Array.from(String(_this2.score), Number);
-
-          for (var i = 0; i < 5 - String(_this2.score).length; i++) {
-            score.unshift(0);
-          }
-
-          _this2.scoreText.setText(score.join(''));
-        }
-      });
-    }
-  }, {
     key: "handleInputs",
     value: function handleInputs() {
-      var _this3 = this;
+      var _this = this;
 
       var jumpTime = 0;
       var downTime = 0;
       var currentGameSpeed = 0;
       this.input.keyboard.on('keydown_ESC', function () {
-        if (this.anims.paused) {
-          this.anims.resumeAll(); // this.gameSpeed = 6;
-
-          this.backgroundSpeed = 2;
-          this.gameSpeed = currentGameSpeed;
-          this.isGameRunning = true;
-          this.timePause = false;
-        } else {
-          this.anims.pauseAll();
-          this.backgroundSpeed = 0; // this.ground.tilePositionX = 0;
-
-          this.isGameRunning = false; // this.gameSpeed = 0;
-
-          currentGameSpeed = this.gameSpeed;
-          this.gameSpeed = 0;
-          this.timePause = true;
+        if (!this.gameOver) {
+          if (this.anims.paused) {
+            this.anims.resumeAll();
+            this.textPause.visible = false;
+            this.backgroundSpeed = 2;
+            this.gameSpeed = currentGameSpeed;
+            this.isGameRunning = true;
+            this.timePause = false;
+            this.soundPause.play();
+            this.soundGogogo.play();
+          } else {
+            this.anims.pauseAll();
+            this.textPause.visible = true;
+            this.backgroundSpeed = 0;
+            this.isGameRunning = false;
+            currentGameSpeed = this.gameSpeed;
+            this.gameSpeed = 0;
+            this.timePause = true;
+            this.soundPause.play();
+          }
         }
       }, this);
       this.input.keyboard.on('keydown_SPACE', function () {
-        if (_this3.timePause == false) {
+        if (_this.timePause == false) {
           if (!jumpTime == 0) {
             return;
           }
 
-          _this3.player.body.height = 92;
-          _this3.player.body.offset.y = 0;
+          _this.player.body.height = 92;
+          _this.player.body.offset.y = 0;
 
-          _this3.player.setVelocityY(-2600);
+          _this.player.setVelocityY(-2600);
+
+          _this.soundJump.play();
 
           jumpTime = 1;
         }
@@ -729,17 +766,20 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
         jumpTime = 0;
       });
       this.input.keyboard.on('keydown_DOWN', function () {
-        if (_this3.timePause == false) {
+        if (_this.timePause == false) {
           if (!downTime == 0) {
             return;
           }
 
-          _this3.player.body.height = 58;
-          _this3.player.body.offset.y = 34;
+          _this.player.body.height = 58;
+          _this.player.body.offset.y = 34;
+
+          _this.player.setVelocityY(+2600);
+
           downTime = 1;
           setTimeout(function () {
-            _this3.player.body.height = 92;
-            _this3.player.body.offset.y = 0;
+            _this.player.body.height = 92;
+            _this.player.body.offset.y = 0;
           }, 100);
         }
       });
@@ -757,7 +797,17 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
 
       if (obsticleNum > 3) {
         obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], "enemy-spe1");
-        obsticle.play('enemy--spe1', 1);
+
+        if (this.score >= 0 && this.score <= 199) {
+          obsticle.play('enemy--spe4', 1);
+        } else if (this.score >= 200 && this.score <= 399) {
+          obsticle.play('enemy--spe2', 1);
+        } else if (this.score >= 400 && this.score <= 599) {
+          obsticle.play('enemy--spe3', 1);
+        } else if (this.score >= 600) {
+          obsticle.play('enemy--spe1', 1);
+        }
+
         obsticle.body.height = 110;
         obsticle.body.width = 85;
       } else {
@@ -807,9 +857,29 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       }
     }
   }, {
+    key: "randomSound",
+    value: function randomSound(sound1, sound2) {
+      var randomNumber = Math.floor(Math.random() * 2);
+
+      if (randomNumber == 0) {
+        return sound1.play();
+      } else {
+        return sound2.play();
+      }
+    }
+  }, {
+    key: "bonusPoints",
+    value: function bonusPoints() {
+      if (this.data.get('kill') == this.bonusPoint) {
+        this.soundPause.play();
+        this.score += 100;
+        this.bonusPoint += 10;
+      }
+    }
+  }, {
     key: "update",
     value: function update(time, delta) {
-      var _this4 = this;
+      var _this2 = this;
 
       if (this.data.get('vies') == 0) {
         this.scene.stop();
@@ -820,7 +890,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.background.tilePositionX += this.backgroundSpeed;
       Phaser.Actions.IncX(this.obsticles.getChildren(), -this.gameSpeed);
       this.displayText();
-      this.respawnTime += delta * this.gameSpeed * 0.08;
+      this.respawnTime += delta * this.gameSpeed * 0.06;
 
       if (this.respawnTime >= 700) {
         this.placeObsticle();
@@ -830,20 +900,22 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.obsticles.getChildren().forEach(function (obsticle) {
         if (obsticle.getBounds().right < 0) {
           obsticle.destroy();
-          _this4.vies = _this4.data.set('vies', _this4.data.get('vies') - 1);
+          _this2.vies = _this2.data.set('vies', _this2.data.get('vies') - 1);
         }
       });
       this.obsticles.getChildren().forEach(function (obsticle) {
-        var player = _this4.player;
+        var player = _this2.player;
 
-        _this4.physics.add.overlap(_this4.player, _this4.obsticles, killenemies, null, _this4);
+        _this2.physics.add.overlap(_this2.player, _this2.obsticles, killenemies, null, _this2);
       });
 
       function killenemies(player, obsticle) {
         if (this.player.body.onFloor() == false && obsticle.y == 370) {
+          this.randomSound(this.soundHit, this.soundHit2);
           obsticle.destroy();
           this.enemyDead = this.data.set('kill', this.data.get('kill') + 1);
         } else if (!this.player.body.offset.y == 0 && obsticle.y == 600) {
+          this.randomSound(this.soundHit, this.soundHit2);
           obsticle.destroy();
           this.enemyDead = this.data.set('kill', this.data.get('kill') + 1);
         }
@@ -854,6 +926,21 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       } else {
         this.player.body.height <= 58 ? this.player.anims.play('down', true) : this.player.anims.play('running', true);
       }
+
+      if (this.data.get('vies') == 0) {
+        this.gameOver = true;
+        this.anims.pauseAll();
+        this.randomSound(this.soundEnd, this.soundEnd2);
+        this.isGameRunning = false;
+        this.backgroundSpeed = 0;
+        this.gameSpeed = 0;
+        this.timePause = true;
+        this.textGameOver.visible = true;
+        this.textResumeGame.visible = true;
+        this.data.set('vies', 3);
+      }
+
+      this.bonusPoints();
     }
   }]);
 
@@ -1044,7 +1131,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49901" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63105" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

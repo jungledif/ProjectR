@@ -14,8 +14,8 @@ export class MenuScene extends Phaser.Scene{
         this.add.image(0,0, "title_bg").setOrigin(0);
         
         // Audio menu 
-       let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 1.5, "play_button").setDepth(1);
-       let optionButton = this.add.image(this.game.renderer.width /2, this.game.renderer.height / 1.5 + 100, "options_button").setDepth(1);
+       let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 1.5+100, "play_button").setDepth(1);
+    //    let optionButton = this.add.image(this.game.renderer.width /2, this.game.renderer.height / 1.5 + 100, "options_button").setDepth(1);
        let music = this.sound.add("title_music", {
            loop: true
        })
@@ -58,22 +58,22 @@ export class MenuScene extends Phaser.Scene{
         this.scene.launch();
     })
 
-    optionButton.setInteractive();
-    optionButton.on("pointerover", ()=>{
-        hoverSprite.setVisible(true);
-        hoverSprite.play("walk");
-        hoverSprite.x = optionButton.x - optionButton.width;
-        hoverSprite.y = optionButton.y;
+    // optionButton.setInteractive();
+    // optionButton.on("pointerover", ()=>{
+    //     hoverSprite.setVisible(true);
+    //     hoverSprite.play("walk");
+    //     hoverSprite.x = optionButton.x - optionButton.width;
+    //     hoverSprite.y = optionButton.y;
         
-    })
-    optionButton.on("pointerout", ()=>{
-        hoverSprite.setVisible(false);
-    })
-    optionButton.on("pointerup", ()=>{
-        this.scene.start(CST.SCENES.ENDING);
-        this.scene.launch();
+    // })
+    // optionButton.on("pointerout", ()=>{
+    //     hoverSprite.setVisible(false);
+    // })
+    // optionButton.on("pointerup", ()=>{
+    //     this.scene.start();
+    //     this.scene.launch();
        
-    })
+    // })
 
       }
 

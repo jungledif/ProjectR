@@ -13,7 +13,7 @@ export class LoadScene extends Phaser.Scene{
     preload(){
  // add logo image
  this.load.image("title_bg", "./assets/image/background-menu.png");
- this.load.image("options_button", "./assets/image/options_button1.png");
+//  this.load.image("options_button", "./assets/image/options_button1.png");
  this.load.image("play_button", "./assets/image/play_button1.png");
 //  this.load.image("logo", "./assets/image/logo.png");
  this.load.image("back_menu_button", "./assets/image/backtomenu.png");
