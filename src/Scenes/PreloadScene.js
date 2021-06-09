@@ -23,7 +23,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.audio('gogogo', ['./assets/audio/gogogo.mp3']);
     this.load.audio('loselife', ['./assets/audio/loselife.mp3']);
 
-    this.load.image('sablier', './assets/image/sablier.png');
+    this.load.image('sablier', './assets/image/time-01.svg');
     this.load.image('mort', './assets/image/mort.png');
     this.load.image('coeur', './assets/image/coeur.png');
     this.load.image('botte', './assets/image/botte.png');

@@ -51,7 +51,7 @@ export class PlayScene extends Phaser.Scene {
     this.iconeKill = this.add.image(322, 30, 'mort');
     this.iconeKill.setScale(2);
     this.iconeTime = this.add.image(614, 30, 'sablier');
-    this.iconeTime.setScale(2);
+    this.iconeTime.setScale(0.3);
     this.iconeSpeed = this.add.image(906, 30, 'botte');
     this.iconeSpeed.setScale(2);
     this.iconeVie = this.add.image(30, 690, 'coeur');

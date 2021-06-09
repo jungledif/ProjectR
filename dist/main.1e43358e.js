@@ -408,7 +408,7 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.load.audio('pause', ['./assets/audio/pause.mp3']);
       this.load.audio('gogogo', ['./assets/audio/gogogo.mp3']);
       this.load.audio('loselife', ['./assets/audio/loselife.mp3']);
-      this.load.image('sablier', './assets/image/sablier.png');
+      this.load.image('sablier', './assets/image/time-01.svg');
       this.load.image('mort', './assets/image/mort.png');
       this.load.image('coeur', './assets/image/coeur.png');
       this.load.image('botte', './assets/image/botte.png');
@@ -555,7 +555,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.iconeKill = this.add.image(322, 30, 'mort');
       this.iconeKill.setScale(2);
       this.iconeTime = this.add.image(614, 30, 'sablier');
-      this.iconeTime.setScale(2);
+      this.iconeTime.setScale(0.3);
       this.iconeSpeed = this.add.image(906, 30, 'botte');
       this.iconeSpeed.setScale(2);
       this.iconeVie = this.add.image(30, 690, 'coeur');
@@ -1170,7 +1170,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49848" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51813" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
