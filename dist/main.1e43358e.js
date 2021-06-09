@@ -425,18 +425,9 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
         frameHeight: 94
       }); // enemies
 
-      this.load.spritesheet('enemy-1', './assets/image/enemy1.png', {
-        frameWidth: 70,
-        frameHeight: 80
-      });
-      this.load.spritesheet('enemy-2', './assets/image/enemy2.png', {
-        frameWidth: 70,
-        frameHeight: 80
-      });
-      this.load.spritesheet('enemy-3', './assets/image/enemy3.png', {
-        frameWidth: 70,
-        frameHeight: 80
-      }); // specials enemies
+      this.load.image('enemy-1', './assets/image/enemy1.png');
+      this.load.image('enemy-2', './assets/image/enemy2.png');
+      this.load.image('enemy-3', './assets/image/enemy3.png'); // specials enemies
 
       this.load.spritesheet('enemy-spe1', './assets/image/krugs.png', {
         frameWidth: 95,
@@ -451,6 +442,10 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
         frameHeight: 110
       });
       this.load.spritesheet('enemy-spe4', './assets/image/claptrap.png', {
+        frameWidth: 95,
+        frameHeight: 110
+      });
+      this.load.spritesheet('enemy-spe5', './assets/image/bulbizarre.png', {
         frameWidth: 95,
         frameHeight: 110
       });
@@ -679,33 +674,6 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
         repeat: -1
       });
       this.anims.create({
-        key: 'enemy1',
-        frames: this.anims.generateFrameNumbers('enemy-1', {
-          start: 0,
-          end: 1
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'enemy2',
-        frames: this.anims.generateFrameNumbers('enemy-2', {
-          start: 0,
-          end: 1
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      this.anims.create({
-        key: 'enemy3',
-        frames: this.anims.generateFrameNumbers('enemy-3', {
-          start: 0,
-          end: 1
-        }),
-        frameRate: 10,
-        repeat: -1
-      });
-      this.anims.create({
         key: 'enemy--spe1',
         frames: this.anims.generateFrameNumbers('enemy-spe1', {
           start: 0,
@@ -735,6 +703,15 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.anims.create({
         key: 'enemy--spe4',
         frames: this.anims.generateFrameNumbers('enemy-spe4', {
+          start: 0,
+          end: 7
+        }),
+        frameRate: 16,
+        repeat: -1
+      });
+      this.anims.create({
+        key: 'enemy--spe5',
+        frames: this.anims.generateFrameNumbers('enemy-spe5', {
           start: 0,
           end: 7
         }),
@@ -831,15 +808,16 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
           obsticle.play('enemy--spe2', 1);
         } else if (this.score >= 400 && this.score <= 599) {
           obsticle.play('enemy--spe3', 1);
-        } else if (this.score >= 600) {
+        } else if (this.score >= 600 && this.score <= 799) {
           obsticle.play('enemy--spe1', 1);
+        } else if (this.score >= 800) {
+          obsticle.play('enemy--spe5', 1);
         }
 
         obsticle.body.height = 110;
         obsticle.body.width = 85;
       } else {
-        obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], "enemy".concat(obsticleNum));
-        obsticle.play("enemy".concat(obsticleNum), 1);
+        obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], "enemy-".concat(obsticleNum));
         obsticle.body.height = 70;
         obsticle.body.width = 60;
       }
