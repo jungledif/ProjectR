@@ -33,8 +33,8 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 94
     })
 
-    this.load.spritesheet('perso-down', './assets/image/perso-down.png', {
-      frameWidth: 88,
+    this.load.spritesheet('perso-down', './assets/image/perso-down-2.png', {
+      frameWidth: 100,
       frameHeight: 94
     })
 
@@ -45,20 +45,9 @@ export class PreloadScene extends Phaser.Scene {
 
     // enemies
 
-    this.load.spritesheet('enemy-1', './assets/image/enemy1.png', {
-      frameWidth: 70,
-      frameHeight: 80
-    })
-
-    this.load.spritesheet('enemy-2', './assets/image/enemy2.png', {
-      frameWidth: 70,
-      frameHeight: 80
-    })
-
-    this.load.spritesheet('enemy-3', './assets/image/enemy3.png', {
-      frameWidth: 70,
-      frameHeight: 80
-    })
+    this.load.image('enemy-1', './assets/image/enemy1.png');
+    this.load.image('enemy-2', './assets/image/enemy2.png');
+    this.load.image('enemy-3', './assets/image/enemy3.png');
 
   // specials enemies
 
@@ -78,6 +67,11 @@ export class PreloadScene extends Phaser.Scene {
     })
 
     this.load.spritesheet('enemy-spe4', './assets/image/claptrap.png', {
+      frameWidth: 95,
+      frameHeight: 110
+    })
+
+    this.load.spritesheet('enemy-spe5', './assets/image/bulbizarre.png', {
       frameWidth: 95,
       frameHeight: 110
     })
