@@ -7,6 +7,10 @@
           
           height: 100vh;
     }
+    canvas {
+      border-color: black;
+      border: 0.3rem solid;
+  }
     body {
       margin: 0px;
       display: flex;    
@@ -15,23 +19,29 @@
       flex-direction: column;
       width: 100%;
       height: 100vh;
-      background-color: #000000; 
+      background-color: #ab6627; 
       background-image: url("/Nightgameroom-01.e22879a3.png");
       background-position: 50.4% 34.8%;
       background-repeat: no-repeat;
       background-size: 175%;
       background-attachment: fixed;
      
+    }
+    #gameDiv{
+      width:66%;
+      height: 76%;
     }</style>
     <link rel="stylesheet" href="/style.78032849.css">
 <script src="/style.78032849.js"></script></head>
 
 <body>
   <script src="/phaser.09c160a4.js"></script>
-    <div id="phaser-example">
-      <script src="/main.1e43358e.js" charset="utf-8"></script>
-      <script type="text/javascript"></script>
-    </div>
+    <div id="gameDiv">
+      <div id="phaser-example">
+        <script src="/main.1e43358e.js" charset="utf-8"></script>
+        <script type="text/javascript"></script>
+      </div>
+    </div>  
 </body>
 
 </html>

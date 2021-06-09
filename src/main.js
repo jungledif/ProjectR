@@ -11,9 +11,12 @@ const config= {
             width: 1280,
             height: 720,
             scale: {
-                mode: Phaser.Scale.FIT,
-                autoCenter: Phaser.Scale.CENTER_BOTH
-            },
+                parent:"gameDiv",
+                mode: Phaser.Scale.parent ,
+                autoCenter: Phaser.Scale.CENTER_BOTH,
+                width:1280,
+                height:720
+            },     
             transparent: true,
    
     scene: [
