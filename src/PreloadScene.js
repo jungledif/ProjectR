@@ -21,6 +21,13 @@ class PreloadScene extends Phaser.Scene {
     this.load.audio('pause', ['./audio/pause.mp3']);
     this.load.audio('gogogo', ['./audio/gogogo.mp3']);
 
+    this.load.image('sablier', './sablier.png');
+    this.load.image('mort', './mort.png');
+    this.load.image('coeur', './coeur.png');
+    this.load.image('botte', './botte.png');
+    this.load.image('score', './score.png');
+
+
     this.load.spritesheet('perso', './perso-run.png', {
       frameWidth: 88,
       frameHeight: 94
@@ -35,6 +42,8 @@ class PreloadScene extends Phaser.Scene {
       frameWidth: 88,
       frameHeight: 94
     })
+
+    // enemies
 
     this.load.spritesheet('enemy-1', './enemy1.png', {
       frameWidth: 70,
@@ -51,7 +60,24 @@ class PreloadScene extends Phaser.Scene {
       frameHeight: 80
     })
 
+    // specials enemies
+
     this.load.spritesheet('enemy-spe1', './krugs.png', {
+      frameWidth: 95,
+      frameHeight: 110
+    })
+
+    this.load.spritesheet('enemy-spe2', './soinc.png', {
+      frameWidth: 95,
+      frameHeight: 110
+    })
+
+    this.load.spritesheet('enemy-spe3', './tourelle.png', {
+      frameWidth: 95,
+      frameHeight: 110
+    })
+
+    this.load.spritesheet('enemy-spe4', './claptrap.png', {
       frameWidth: 95,
       frameHeight: 110
     })

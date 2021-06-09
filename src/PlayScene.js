@@ -4,7 +4,7 @@ class PlayScene extends Phaser.Scene {
 
   constructor() {
     super('PlayScene');
-    this.gameSpeed = 6;
+    this.gameSpeed = 9;
     this.backgroundSpeed = 2;
     this.isGameRunning = true;
     this.gameOver = false;
@@ -13,6 +13,7 @@ class PlayScene extends Phaser.Scene {
     this.timePause = false;
     this.minute = 0;
     this.seconde = 0;
+    this.bonusPoint = 10;
   }
 
   create() {
@@ -34,6 +35,20 @@ class PlayScene extends Phaser.Scene {
     this.initColliders();
     this.initSound();
     this.handleInputs();
+    this.initIcone();
+  }
+
+  initIcone() {
+    this.iconeScore = this.add.image(30, 30, 'score');
+    this.iconeScore.setScale(2);
+    this.iconeKill = this.add.image(322, 30, 'mort');
+    this.iconeKill.setScale(2);
+    this.iconeTime = this.add.image(614, 30, 'sablier');
+    this.iconeTime.setScale(2);
+    this.iconeSpeed = this.add.image(906, 30, 'botte');
+    this.iconeSpeed.setScale(2);
+    this.iconeVie = this.add.image(1200, 30, 'coeur');
+    this.iconeVie.setScale(2);
   }
 
   initSound() {
@@ -53,14 +68,14 @@ class PlayScene extends Phaser.Scene {
 
   initText() {
 
-    this.scoreText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' });
-    this.timeText = this.add.text(1050, 30, '', { font: '900 35px Roboto', fill: '#ffffff' });
-    this.textVies = this.add.text(1050, 60, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.scoreText = this.add.text(60, 15, '', { fill: "#ffffff", font: '900 35px Roboto' });
+    this.timeText = this.add.text(644, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textVies = this.add.text(1230, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textPause = this.add.text(400, 260, '', { font: '900 150px Roboto', fill: '#ffffff' });
-    this.textVitesse = this.add.text(1050, 90, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textVitesse = this.add.text(936, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.highScoreText = this.add.text(1050, 0, '', { fill: "#535353", font: '900 35px Roboto' });
     this.textGameOver = this.add.text(300, 260, '', { font: '900 100px Roboto', fill: '#000000' });
-    this.textEnemyDead = this.add.text(1050, 120, '', { font: '900 35px Roboto', fill: '#ffffff' });
+    this.textEnemyDead = this.add.text(352, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textResumeGame = this.add.text(300, 360, '', { font: '900 70px Roboto', fill: '#ffffff' });
     this.textPause.visible = false;
     this.textGameOver.visible = false;
@@ -70,11 +85,11 @@ class PlayScene extends Phaser.Scene {
   displayText() {
     this.textPause.setText('PAUSE');
     this.textGameOver.setText('GAME OVER');
-    this.scoreText.setText('Score: ' + this.score);
-    this.textVies.setText('Vies : ' + this.data.get('vies'));
-    this.textEnemyDead.setText('Kills : ' + this.data.get('kill'));
-    this.textVitesse.setText('Vitesse : ' + Math.trunc(this.gameSpeed));
-    this.timeText.setText('Temps : ' + this.minute + " : " + this.seconde);
+    this.scoreText.setText(this.score);
+    this.textVies.setText(this.data.get('vies'));
+    this.textEnemyDead.setText(this.data.get('kill'));
+    this.textVitesse.setText(Math.trunc(this.gameSpeed));
+    this.timeText.setText(this.minute + " : " + this.seconde);
     this.textResumeGame.setText('Votre score est de : ' + this.score + '\nVous avez tué ' + this.data.get('kill') + ' ennemies\nen ' + this.minute + " minutes et " + this.seconde + ' secondes !');
   }
 
@@ -131,8 +146,28 @@ class PlayScene extends Phaser.Scene {
       frameRate: 16,
       repeat: -1
     })
-  }
 
+    this.anims.create({
+      key: 'enemy--spe2',
+      frames: this.anims.generateFrameNumbers('enemy-spe2', { start: 0, end: 7 }),
+      frameRate: 16,
+      repeat: -1
+    })
+
+    this.anims.create({
+      key: 'enemy--spe3',
+      frames: this.anims.generateFrameNumbers('enemy-spe3', { start: 0, end: 7 }),
+      frameRate: 16,
+      repeat: -1
+    })
+
+    this.anims.create({
+      key: 'enemy--spe4',
+      frames: this.anims.generateFrameNumbers('enemy-spe4', { start: 0, end: 7 }),
+      frameRate: 16,
+      repeat: -1
+    })
+  }
 
   handleInputs() {
 
@@ -205,7 +240,16 @@ class PlayScene extends Phaser.Scene {
 
     if (obsticleNum > 3) {
       obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], `enemy-spe1`);
-      obsticle.play('enemy--spe1', 1);
+      if (this.score >= 0 && this.score <= 199) {
+        obsticle.play('enemy--spe4', 1);
+      } else if (this.score >= 200 && this.score <= 399) {
+        obsticle.play('enemy--spe2', 1);
+      } else if (this.score >= 400 && this.score <= 599) {
+        obsticle.play('enemy--spe3', 1);
+      } else if (this.score >= 600) {
+        obsticle.play('enemy--spe1', 1);
+      }
+
       obsticle.body.height = 110;
       obsticle.body.width = 85;
     } else {
@@ -257,13 +301,21 @@ class PlayScene extends Phaser.Scene {
     }
   }
 
+  bonusPoints() {
+    if (this.data.get('kill') == this.bonusPoint) {
+      this.soundPause.play();
+      this.score += 100;
+      this.bonusPoint += 10;
+    }
+  }
+
   update(time, delta) {
     this.ground.tilePositionX += this.gameSpeed;
     this.background.tilePositionX += this.backgroundSpeed;
     Phaser.Actions.IncX(this.obsticles.getChildren(), -this.gameSpeed);
     this.displayText();
 
-    this.respawnTime += delta * this.gameSpeed * 0.08;
+    this.respawnTime += delta * this.gameSpeed * 0.06;
     if (this.respawnTime >= 700) {
       this.placeObsticle();
       this.respawnTime = 0;
@@ -309,16 +361,11 @@ class PlayScene extends Phaser.Scene {
       this.backgroundSpeed = 0;
       this.gameSpeed = 0;
       this.timePause = true;
-
       this.textGameOver.visible = true;
       this.textResumeGame.visible = true;
-      this.textVies.visible = false;
-      this.textVitesse.visible = false;
-      this.scoreText.visible = false;
-      this.timeText.visible = false;
-      this.textEnemyDead.visible = false;
       this.data.set('vies', 3);
     }
+    this.bonusPoints();
   }
 }
 
