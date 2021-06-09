@@ -33,8 +33,8 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 94
     })
 
-    this.load.spritesheet('perso-down', './assets/image/perso-down.png', {
-      frameWidth: 88,
+    this.load.spritesheet('perso-down', './assets/image/perso-down-2.png', {
+      frameWidth: 100,
       frameHeight: 94
     })
 

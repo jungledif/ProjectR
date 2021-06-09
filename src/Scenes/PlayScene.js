@@ -106,21 +106,21 @@ export class PlayScene extends Phaser.Scene {
   initAnims() {
     this.anims.create({
       key: 'running',
-      frames: this.anims.generateFrameNumbers('perso', { start: 0, end: 15 }),
-      frameRate: 16,
+      frames: this.anims.generateFrameNumbers('perso', { start: 0, end: 7 }),
+      frameRate: 12,
       repeat: -1
     });
 
     this.anims.create({
       key: 'down',
-      frames: this.anims.generateFrameNumbers('perso-down', { start: 0, end: 15 }),
+      frames: this.anims.generateFrameNumbers('perso-down', { start: 0, end: 6 }),
       frameRate: 16,
       repeat: -1
     });
 
     this.anims.create({
       key: 'jump',
-      frames: this.anims.generateFrameNumbers('perso-up', { start: 0, end: 8 }),
+      frames: this.anims.generateFrameNumbers('perso-up', { start: 0, end: 7 }),
       frameRate: 16,
       repeat: -1
     });
