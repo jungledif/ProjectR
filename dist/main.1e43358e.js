@@ -407,6 +407,7 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.load.audio('end2', ['./assets/audio/end2.mp3']);
       this.load.audio('pause', ['./assets/audio/pause.mp3']);
       this.load.audio('gogogo', ['./assets/audio/gogogo.mp3']);
+      this.load.audio('loselife', ['./assets/audio/loselife.mp3']);
       this.load.image('sablier', './assets/image/sablier.png');
       this.load.image('mort', './assets/image/mort.png');
       this.load.image('coeur', './assets/image/coeur.png');
@@ -557,8 +558,12 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.iconeTime.setScale(2);
       this.iconeSpeed = this.add.image(906, 30, 'botte');
       this.iconeSpeed.setScale(2);
-      this.iconeVie = this.add.image(1200, 30, 'coeur');
-      this.iconeVie.setScale(2);
+      this.iconeVie = this.add.image(30, 690, 'coeur');
+      this.iconeVie2 = this.add.image(60, 690, 'coeur');
+      this.iconeVie3 = this.add.image(90, 690, 'coeur');
+      this.iconeVie.setScale(0.10);
+      this.iconeVie2.setScale(0.10);
+      this.iconeVie3.setScale(0.10);
     }
   }, {
     key: "initSound",
@@ -570,6 +575,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.soundJump = this.sound.add('jump');
       this.soundPause = this.sound.add('pause');
       this.soundGogogo = this.sound.add('gogogo');
+      this.soundLoseLife = this.sound.add('loselife');
     }
   }, {
     key: "initTimeEvent",
@@ -597,11 +603,8 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.timeText = this.add.text(644, 15, '', {
         font: '900 35px Roboto',
         fill: '#ffffff'
-      });
-      this.textVies = this.add.text(1230, 15, '', {
-        font: '900 35px Roboto',
-        fill: '#ffffff'
-      });
+      }); // this.textVies = this.add.text(1230, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
+
       this.textPause = this.add.text(400, 260, '', {
         font: '900 150px Roboto',
         fill: '#ffffff'
@@ -635,8 +638,8 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
     value: function displayText() {
       this.textPause.setText('PAUSE');
       this.textGameOver.setText('GAME OVER');
-      this.scoreText.setText(this.score);
-      this.textVies.setText(this.data.get('vies'));
+      this.scoreText.setText(this.score); // this.textVies.setText(this.data.get('vies'));
+
       this.textEnemyDead.setText(this.data.get('kill'));
       this.textVitesse.setText(Math.trunc(this.gameSpeed));
       this.timeText.setText(this.minute + " : " + this.seconde);
@@ -912,6 +915,11 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       if (this.data.get('vies') == 0) {
         this.scene.stop();
         this.scene.start(_CST.CST.SCENES.ENDING, this.score);
+      } else if (this.data.get('vies') == 1) {
+        this.iconeVie2.visible = false;
+        this.iconeVie3.visible = false;
+      } else if (this.data.get('vies') == 2) {
+        this.iconeVie3.visible = false;
       }
 
       this.ground.tilePositionX += this.gameSpeed;
@@ -928,6 +936,9 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.obsticles.getChildren().forEach(function (obsticle) {
         if (obsticle.getBounds().right < 0) {
           obsticle.destroy();
+
+          _this2.soundLoseLife.play();
+
           _this2.vies = _this2.data.set('vies', _this2.data.get('vies') - 1);
         }
       });
@@ -1159,7 +1170,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62462" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49848" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
