@@ -1097,6 +1097,10 @@ var config = {
   type: Phaser.AUTO,
   width: 1280,
   height: 720,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  },
   transparent: true,
   scene: [_LoadScene.LoadScene, _MenuScene.MenuScene, _PreloadScene.PreloadScene, _PlayScene.PlayScene, _EndScene.EndScene],
   physics: {
@@ -1135,7 +1139,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59282" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57903" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
