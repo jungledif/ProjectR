@@ -12,11 +12,11 @@ export class EndScene extends Phaser.Scene{
     }
     create () {
        
-        this.add.image(0,0, "title_bg").setOrigin(0);
+        this.add.image(0,0, "end_bg").setOrigin(0);
         
-       let retryButton = this.add.image(this.game.renderer.width / 2.35, this.game.renderer.height / 2, "retry_button");
-       let backMenuButton = this.add.image(this.game.renderer.width /2.35, this.game.renderer.height / 2 + 100, "back_menu_button").setDepth(1);
-       let music = this.sound.add("title_music", {
+       let retryButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "retry_button");
+       let backMenuButton = this.add.image(this.game.renderer.width /2, this.game.renderer.height / 2 + 100, "back_menu_button").setDepth(1);
+       let music = this.sound.add("end_music", {
            loop: true
        })
        
@@ -28,6 +28,8 @@ export class EndScene extends Phaser.Scene{
 
     this.scoreText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' });
     this.scoreText.setText('Score: ' + this.score);
+
+    this.soundbutton = this.sound.add("soundbutton");
     
     this.anims.create({
         key: "walk",
@@ -77,6 +79,7 @@ export class EndScene extends Phaser.Scene{
     })
     backMenuButton.on("pointerup", ()=>{
         music.stop();
+        this.soundbutton.play();
         this.scene.stop();
         this.scene.start(CST.SCENES.LOAD);
         

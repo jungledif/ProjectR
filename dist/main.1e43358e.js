@@ -190,7 +190,11 @@ var LoadScene = /*#__PURE__*/function (_Phaser$Scene) {
       var _this = this;
 
       // add logo image
-      this.load.image("title_bg", "./assets/image/background-menu.png"); //  this.load.image("options_button", "./assets/image/options_button1.png");
+      this.load.image("title_bg", "./assets/image/background-menu.png");
+      this.load.image("end_bg", "./assets/image/backgroundend.png");
+      this.load.audio("title_music", "./assets/audio/menu-music.mp3");
+      this.load.audio("end_music", "./assets/audio/failsound.mp3");
+      this.load.audio("soundbutton", "./assets/audio/screenbuttons.wav"); //  this.load.image("options_button", "./assets/image/options_button1.png");
 
       this.load.image("play_button", "./assets/image/play_button1.png"); //  this.load.image("logo", "./assets/image/logo.png");
 
@@ -290,10 +294,11 @@ var MenuScene = /*#__PURE__*/function (_Phaser$Scene) {
 
       var playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 1.5 + 100, "play_button").setDepth(1); //    let optionButton = this.add.image(this.game.renderer.width /2, this.game.renderer.height / 1.5 + 100, "options_button").setDepth(1);
 
-      var music = this.sound.add("title_music", {
+      var musicmenu = this.sound.add("title_music", {
         loop: true
-      }); //    this.sound.play("title_music");
-
+      });
+      musicmenu.play();
+      this.soundbutton = this.sound.add("soundbutton");
       var hoverSprite = this.add.sprite(100, 100, "cat").setDepth(1);
       hoverSprite.setScale(2);
       hoverSprite.setVisible(false);
@@ -323,6 +328,10 @@ var MenuScene = /*#__PURE__*/function (_Phaser$Scene) {
         hoverSprite.setVisible(false);
       });
       playButton.on("pointerup", function () {
+        musicmenu.stop();
+
+        _this.soundbutton.play();
+
         _this.scene.start(_CST.CST.SCENES.PRELOAD);
 
         _this.scene.launch();
@@ -399,15 +408,18 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.load.image('sky', './assets/image/skyy.png');
       this.load.image('ground', './assets/image/ground.png');
       this.load.image('groundinvi', './assets/image/groundinvi.png');
-      this.load.image('background', './assets/image/background.png');
-      this.load.audio('hit', ['./assets/audio/hit.mp3']);
-      this.load.audio('end', ['./assets/audio/end.mp3']);
-      this.load.audio('hit2', ['./assets/audio/hit2.mp3']);
+      this.load.image('background', './assets/image/background.png'); //this.load.audio('hit', ['./assets/audio/hit.mp3']);
+
+      this.load.audio('end', ['./assets/audio/end.mp3']); //this.load.audio('hit2', ['./assets/audio/hit2.mp3']);
+
       this.load.audio('jump', ['./assets/audio/jump.mp3']);
       this.load.audio('end2', ['./assets/audio/end2.mp3']);
       this.load.audio('pause', ['./assets/audio/pause.mp3']);
       this.load.audio('gogogo', ['./assets/audio/gogogo.mp3']);
       this.load.audio('loselife', ['./assets/audio/loselife.mp3']);
+      this.load.audio('hit', ['./assets/audio/hitt.wav']);
+      this.load.audio('hit2', ['./assets/audio/hitt2.wav']);
+      this.load.audio('soundgame', ['./assets/audio/musicgame.mp3']);
       this.load.image('sablier', './assets/image/time-01.svg');
       this.load.image('mort', './assets/image/mort.png');
       this.load.image('coeur', './assets/image/coeur.png');
@@ -546,6 +558,8 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.initSound();
       this.handleInputs();
       this.initIcone();
+      this.soundgame = this.sound.add('soundgame');
+      this.soundgame.play();
     }
   }, {
     key: "initIcone",
@@ -746,6 +760,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.input.keyboard.on('keydown_ESC', function () {
         if (!this.gameOver) {
           if (this.anims.paused) {
+            this.soundgame.resume();
             this.anims.resumeAll();
             this.textPause.visible = false;
             this.backgroundSpeed = 2;
@@ -755,6 +770,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
             this.soundPause.play();
             this.soundGogogo.play();
           } else {
+            this.soundgame.pause();
             this.anims.pauseAll();
             this.textPause.visible = true;
             this.backgroundSpeed = 0;
@@ -913,6 +929,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       var _this2 = this;
 
       if (this.data.get('vies') == 0) {
+        this.soundgame.stop();
         this.scene.stop();
         this.scene.start(_CST.CST.SCENES.ENDING, this.score);
       } else if (this.data.get('vies') == 1) {
@@ -1042,10 +1059,10 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
     value: function create() {
       var _this = this;
 
-      this.add.image(0, 0, "title_bg").setOrigin(0);
-      var retryButton = this.add.image(this.game.renderer.width / 2.35, this.game.renderer.height / 2, "retry_button");
-      var backMenuButton = this.add.image(this.game.renderer.width / 2.35, this.game.renderer.height / 2 + 100, "back_menu_button").setDepth(1);
-      var music = this.sound.add("title_music", {
+      this.add.image(0, 0, "end_bg").setOrigin(0);
+      var retryButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "retry_button");
+      var backMenuButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, "back_menu_button").setDepth(1);
+      var music = this.sound.add("end_music", {
         loop: true
       });
       music.play();
@@ -1057,6 +1074,7 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
         font: '900 35px Roboto'
       });
       this.scoreText.setText('Score: ' + this.score);
+      this.soundbutton = this.sound.add("soundbutton");
       this.anims.create({
         key: "walk",
         frameRate: 4,
@@ -1102,6 +1120,8 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
       backMenuButton.on("pointerup", function () {
         music.stop();
 
+        _this.soundbutton.play();
+
         _this.scene.stop();
 
         _this.scene.start(_CST.CST.SCENES.LOAD);
@@ -1142,7 +1162,7 @@ var config = {
   }
 };
 new Phaser.Game(config);
-},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1170,7 +1190,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51813" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54905" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1346,5 +1366,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
+},{}]},{},["../../../Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
 //# sourceMappingURL=/main.1e43358e.js.map

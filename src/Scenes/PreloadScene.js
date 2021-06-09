@@ -14,14 +14,18 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('groundinvi', './assets/image/groundinvi.png');
     this.load.image('background', './assets/image/background.png');
 
-    this.load.audio('hit', ['./assets/audio/hit.mp3']);
+    //this.load.audio('hit', ['./assets/audio/hit.mp3']);
     this.load.audio('end', ['./assets/audio/end.mp3']);
-    this.load.audio('hit2', ['./assets/audio/hit2.mp3']);
+    //this.load.audio('hit2', ['./assets/audio/hit2.mp3']);
     this.load.audio('jump', ['./assets/audio/jump.mp3']);
     this.load.audio('end2', ['./assets/audio/end2.mp3']);
     this.load.audio('pause', ['./assets/audio/pause.mp3']);
     this.load.audio('gogogo', ['./assets/audio/gogogo.mp3']);
     this.load.audio('loselife', ['./assets/audio/loselife.mp3']);
+    this.load.audio('hit', ['./assets/audio/hitt.wav']);
+    this.load.audio('hit2', ['./assets/audio/hitt2.wav']);
+
+    this.load.audio('soundgame', ['./assets/audio/musicgame.mp3']);
 
     this.load.image('sablier', './assets/image/time-01.svg');
     this.load.image('mort', './assets/image/mort.png');

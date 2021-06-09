@@ -16,10 +16,12 @@ export class MenuScene extends Phaser.Scene{
         // Audio menu 
        let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 1.5+100, "play_button").setDepth(1);
     //    let optionButton = this.add.image(this.game.renderer.width /2, this.game.renderer.height / 1.5 + 100, "options_button").setDepth(1);
-       let music = this.sound.add("title_music", {
+       let musicmenu = this.sound.add("title_music", {
            loop: true
        })
-    //    this.sound.play("title_music");
+    musicmenu.play();
+
+    this.soundbutton = this.sound.add("soundbutton");
 
     let hoverSprite = this.add.sprite(100, 100, "cat").setDepth(1);
     hoverSprite.setScale(2);
@@ -54,6 +56,8 @@ export class MenuScene extends Phaser.Scene{
         hoverSprite.setVisible(false);
     })
     playButton.on("pointerup", ()=>{
+        musicmenu.stop();
+        this.soundbutton.play();
         this.scene.start(CST.SCENES.PRELOAD);
         this.scene.launch();
     })

@@ -13,6 +13,13 @@ export class LoadScene extends Phaser.Scene{
     preload(){
  // add logo image
  this.load.image("title_bg", "./assets/image/background-menu.png");
+ this.load.image("end_bg", "./assets/image/backgroundend.png");
+
+ this.load.audio("title_music", "./assets/audio/menu-music.mp3");
+ this.load.audio("end_music", "./assets/audio/failsound.mp3");
+
+ this.load.audio("soundbutton", "./assets/audio/screenbuttons.wav");
+ 
 //  this.load.image("options_button", "./assets/image/options_button1.png");
  this.load.image("play_button", "./assets/image/play_button1.png");
 //  this.load.image("logo", "./assets/image/logo.png");

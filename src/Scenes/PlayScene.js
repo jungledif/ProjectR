@@ -43,6 +43,9 @@ export class PlayScene extends Phaser.Scene {
     this.initSound();
     this.handleInputs();
     this.initIcone();
+
+    this.soundgame = this.sound.add('soundgame');
+    this.soundgame.play();
   }
 
   initIcone() {
@@ -181,6 +184,7 @@ export class PlayScene extends Phaser.Scene {
     this.input.keyboard.on('keydown_ESC', function () {
       if (!this.gameOver) {
         if (this.anims.paused) {
+          this.soundgame.resume();
           this.anims.resumeAll();
           this.textPause.visible = false;
           this.backgroundSpeed = 2;
@@ -191,6 +195,7 @@ export class PlayScene extends Phaser.Scene {
           this.soundGogogo.play();
         }
         else {
+          this.soundgame.pause();
           this.anims.pauseAll();
           this.textPause.visible = true;
           this.backgroundSpeed = 0;
@@ -326,6 +331,7 @@ export class PlayScene extends Phaser.Scene {
 
   update(time, delta) {
     if (this.data.get('vies') == 0) {
+      this.soundgame.stop();
       this.scene.stop();
       this.scene.start(CST.SCENES.ENDING, this.score);
     } else if (this.data.get('vies') == 1) {
@@ -380,7 +386,6 @@ export class PlayScene extends Phaser.Scene {
         this.randomImage(this.choiceDownImage) :
         this.player.anims.play('running', true);
     }
-
 
     // if (this.data.get('vies') == 0) {
     //   this.gameOver = true;
