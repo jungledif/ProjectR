@@ -119,6 +119,13 @@ export class PlayScene extends Phaser.Scene {
     });
 
     this.anims.create({
+      key: 'down2',
+      frames: this.anims.generateFrameNumbers('perso-down2', { start: 0, end: 6 }),
+      frameRate: 16,
+      repeat: -1
+    });
+
+    this.anims.create({
       key: 'jump',
       frames: this.anims.generateFrameNumbers('perso-up', { start: 0, end: 7 }),
       frameRate: 16,
@@ -210,6 +217,7 @@ export class PlayScene extends Phaser.Scene {
     this.input.keyboard.on('keydown_DOWN', () => {
       if (this.timePause == false) {
         if (!downTime == 0) { return; }
+        this.choiceDownImage = Math.floor(Math.random() * 2);
         this.player.body.height = 58;
         this.player.body.offset.y = 34;
         this.player.setVelocityY(+2600);
@@ -295,6 +303,14 @@ export class PlayScene extends Phaser.Scene {
     }
   }
 
+  randomImage(randomNumber) {
+    if (randomNumber == 0) {
+      return this.player.anims.play('down', true);
+    } else {
+      return this.player.anims.play('down2', true);
+    }
+  }
+
   bonusPoints() {
     if (this.data.get('kill') == this.bonusPoint) {
       this.soundPause.play();
@@ -348,7 +364,8 @@ export class PlayScene extends Phaser.Scene {
       this.player.anims.play('jump', true);
     } else {
       this.player.body.height <= 58 ?
-        this.player.anims.play('down', true) :
+        // this.player.anims.play('down', true) :
+        this.randomImage(this.choiceDownImage) :
         this.player.anims.play('running', true);
     }
 

@@ -1,13 +1,13 @@
-import {CST} from "../CST";
+import { CST } from "../CST";
 
 export class PreloadScene extends Phaser.Scene {
 
   constructor() {
     super({
       key: CST.SCENES.PRELOAD
-  })
+    })
   }
- 
+
   preload() {
     this.load.image('sky', './assets/image/skyy.png');
     this.load.image('ground', './assets/image/ground.png');
@@ -33,7 +33,12 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 94
     })
 
-    this.load.spritesheet('perso-down', './assets/image/perso-down-2.png', {
+    this.load.spritesheet('perso-down', './assets/image/perso-down-1.png', {
+      frameWidth: 100,
+      frameHeight: 94
+    })
+
+    this.load.spritesheet('perso-down2', './assets/image/perso-down-2.png', {
       frameWidth: 100,
       frameHeight: 94
     })
@@ -49,7 +54,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('enemy-2', './assets/image/enemy2.png');
     this.load.image('enemy-3', './assets/image/enemy3.png');
 
-  // specials enemies
+    // specials enemies
 
     this.load.spritesheet('enemy-spe1', './assets/image/krugs.png', {
       frameWidth: 95,
@@ -76,7 +81,7 @@ export class PreloadScene extends Phaser.Scene {
       frameHeight: 110
     })
   }
-  
+
   create() {
     this.scene.start(CST.SCENES.PLAYSCENE);
     this.scene.launch();

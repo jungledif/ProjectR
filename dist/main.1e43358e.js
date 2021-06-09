@@ -416,7 +416,11 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
         frameWidth: 88,
         frameHeight: 94
       });
-      this.load.spritesheet('perso-down', './assets/image/perso-down-2.png', {
+      this.load.spritesheet('perso-down', './assets/image/perso-down-1.png', {
+        frameWidth: 100,
+        frameHeight: 94
+      });
+      this.load.spritesheet('perso-down2', './assets/image/perso-down-2.png', {
         frameWidth: 100,
         frameHeight: 94
       });
@@ -665,6 +669,15 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
         repeat: -1
       });
       this.anims.create({
+        key: 'down2',
+        frames: this.anims.generateFrameNumbers('perso-down2', {
+          start: 0,
+          end: 6
+        }),
+        frameRate: 16,
+        repeat: -1
+      });
+      this.anims.create({
         key: 'jump',
         frames: this.anims.generateFrameNumbers('perso-up', {
           start: 0,
@@ -775,6 +788,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
             return;
           }
 
+          _this.choiceDownImage = Math.floor(Math.random() * 2);
           _this.player.body.height = 58;
           _this.player.body.offset.y = 34;
 
@@ -873,6 +887,15 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       }
     }
   }, {
+    key: "randomImage",
+    value: function randomImage(randomNumber) {
+      if (randomNumber == 0) {
+        return this.player.anims.play('down', true);
+      } else {
+        return this.player.anims.play('down2', true);
+      }
+    }
+  }, {
     key: "bonusPoints",
     value: function bonusPoints() {
       if (this.data.get('kill') == this.bonusPoint) {
@@ -929,7 +952,8 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       if (this.player.body.onFloor() == false) {
         this.player.anims.play('jump', true);
       } else {
-        this.player.body.height <= 58 ? this.player.anims.play('down', true) : this.player.anims.play('running', true);
+        this.player.body.height <= 58 ? // this.player.anims.play('down', true) :
+        this.randomImage(this.choiceDownImage) : this.player.anims.play('running', true);
       } // if (this.data.get('vies') == 0) {
       //   this.gameOver = true;
       //   this.anims.pauseAll();
@@ -1107,7 +1131,7 @@ var config = {
   }
 };
 new Phaser.Game(config);
-},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"C:/Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1135,7 +1159,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50760" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62462" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1311,5 +1335,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
+},{}]},{},["../../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
 //# sourceMappingURL=/main.1e43358e.js.map
