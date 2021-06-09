@@ -4,11 +4,5 @@ body{
     align-items: center;
     flex-direction: column;
     width: 100%;
-<<<<<<< HEAD
-    background-image: url("../assets/images/arcade.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-=======
->>>>>>> master
+
 }
