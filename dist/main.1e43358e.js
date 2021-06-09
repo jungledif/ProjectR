@@ -1152,6 +1152,10 @@ var config = {
   type: Phaser.AUTO,
   width: 1280,
   height: 720,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  },
   transparent: true,
   scene: [_LoadScene.LoadScene, _MenuScene.MenuScene, _PreloadScene.PreloadScene, _PlayScene.PlayScene, _EndScene.EndScene],
   physics: {
@@ -1162,7 +1166,11 @@ var config = {
   }
 };
 new Phaser.Game(config);
+<<<<<<< HEAD
 },{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+=======
+},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+>>>>>>> dev_cssPage
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1190,7 +1198,11 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+<<<<<<< HEAD
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "54905" + '/');
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57903" + '/');
+>>>>>>> dev_cssPage
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1366,5 +1378,9 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
+<<<<<<< HEAD
 },{}]},{},["../../../Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
+=======
+},{}]},{},["../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
+>>>>>>> dev_cssPage
 //# sourceMappingURL=/main.1e43358e.js.map
