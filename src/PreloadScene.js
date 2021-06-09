@@ -27,7 +27,6 @@ class PreloadScene extends Phaser.Scene {
     this.load.image('botte', './botte.png');
     this.load.image('score', './score.png');
 
-
     this.load.spritesheet('perso', './perso-run.png', {
       frameWidth: 88,
       frameHeight: 94
