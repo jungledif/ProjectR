@@ -21,13 +21,13 @@ export class PlayScene extends Phaser.Scene {
     this.seconde = 0;
     this.bonusPoint = 10;
 
+    this.data.set('score', this.gameSpeed);
+    this.data.set('time', this.minute + " : " + this.seconde);
+    this.enemyDead = this.data.set('kill', 0);
+    this.vies = this.data.set('vies', 3);
     this.timePause = false;
 
     const { height, width } = this.game.config;
-    this.vies = this.data.set('vies', 3);
-
-    this.enemyDead = this.data.set('kill', 0);
-
     this.add.image(640, 360, 'sky');
     this.background = this.add.tileSprite(0, height, width, 720, 'background').setOrigin(0, 1);
     this.ground = this.add.tileSprite(0, height, width, 170, 'ground').setOrigin(0, 1);
@@ -49,14 +49,14 @@ export class PlayScene extends Phaser.Scene {
   }
 
   initIcone() {
-    this.iconeScore = this.add.image(30, 30, 'score');
-    this.iconeScore.setScale(2);
-    this.iconeKill = this.add.image(322, 30, 'mort');
-    this.iconeKill.setScale(2);
+    // this.iconeScore = this.add.image(30, 30, 'score');
+    // this.iconeScore.setScale(2);
+    // this.iconeKill = this.add.image(322, 30, 'mort');
+    // this.iconeKill.setScale(2);
     this.iconeTime = this.add.image(614, 30, 'sablier');
     this.iconeTime.setScale(0.3);
-    this.iconeSpeed = this.add.image(906, 30, 'botte');
-    this.iconeSpeed.setScale(2);
+    // this.iconeSpeed = this.add.image(906, 30, 'botte');
+    // this.iconeSpeed.setScale(2);
     this.iconeVie = this.add.image(30, 690, 'coeur');
     this.iconeVie2 = this.add.image(60, 690, 'coeur');
     this.iconeVie3 = this.add.image(90, 690, 'coeur');
@@ -82,7 +82,7 @@ export class PlayScene extends Phaser.Scene {
   }
 
   initText() {
-    this.scoreText = this.add.text(60, 15, '', { fill: "#ffffff", font: '900 35px Roboto' });
+    this.scoreText = this.add.text(30, 15, '', { fill: "#ffffff", font: '900 35px Roboto' });
     this.timeText = this.add.text(644, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
     // this.textVies = this.add.text(1230, 15, '', { font: '900 35px Roboto', fill: '#ffffff' });
     this.textPause = this.add.text(400, 260, '', { font: '900 150px Roboto', fill: '#ffffff' });
@@ -101,10 +101,10 @@ export class PlayScene extends Phaser.Scene {
     this.textGameOver.setText('GAME OVER');
     this.scoreText.setText(this.score);
     // this.textVies.setText(this.data.get('vies'));
-    this.textEnemyDead.setText(this.data.get('kill'));
-    this.textVitesse.setText(Math.trunc(this.gameSpeed));
+    // this.textEnemyDead.setText(this.data.get('kill'));
+    // this.textVitesse.setText(Math.trunc(this.gameSpeed));
     this.timeText.setText(this.minute + " : " + this.seconde);
-    this.textResumeGame.setText('Votre score est de : ' + this.score + '\nVous avez tué ' + this.data.get('kill') + ' ennemies\nen ' + this.minute + " minutes et " + this.seconde + ' secondes !');
+    // this.textResumeGame.setText('Votre score est de : ' + this.score + '\nVous avez tué ' + this.data.get('kill') + ' ennemies\nen ' + this.minute + " minutes et " + this.seconde + ' secondes !');
   }
 
   initColliders() {
