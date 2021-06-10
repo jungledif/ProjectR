@@ -8,6 +8,9 @@ export class EndScene extends Phaser.Scene{
     }
     init(data){
         this.score = data;
+        this.enemyDead = data;
+        this.minute = data;
+        this.seconde = data;
        
     }
     create () {
@@ -28,6 +31,10 @@ export class EndScene extends Phaser.Scene{
 
     this.scoreText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' });
     this.scoreText.setText('Score: ' + this.score);
+    this.enemyDeadText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' });
+    this.enemyDeadText.setText('Ennemies tués: ' + this.enemyDead);
+    this.timeText = this.add.text(1050, 0, '', { fill: "#ffffff", font: '900 35px Roboto' });
+    this.timeText.setText('Temps: ' + this.minute + this.seconde);
 
     this.soundbutton = this.sound.add("soundbutton");
     

@@ -932,7 +932,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       if (this.data.get('vies') == 0) {
         this.soundgame.stop();
         this.scene.stop();
-        this.scene.start(_CST.CST.SCENES.ENDING, this.score);
+        this.scene.start(_CST.CST.SCENES.ENDING, this.score, this.enemyDead, this.minute, this.seconde);
       } else if (this.data.get('vies') == 1) {
         this.iconeVie2.visible = false;
         this.iconeVie3.visible = false;
@@ -1054,6 +1054,9 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
     key: "init",
     value: function init(data) {
       this.score = data;
+      this.enemyDead = data;
+      this.minute = data;
+      this.seconde = data;
     }
   }, {
     key: "create",
@@ -1075,6 +1078,16 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
         font: '900 35px Roboto'
       });
       this.scoreText.setText('Score: ' + this.score);
+      this.enemyDeadText = this.add.text(1050, 0, '', {
+        fill: "#ffffff",
+        font: '900 35px Roboto'
+      });
+      this.enemyDeadText.setText('Ennemies tués: ' + this.enemyDead);
+      this.timeText = this.add.text(1050, 0, '', {
+        fill: "#ffffff",
+        font: '900 35px Roboto'
+      });
+      this.timeText.setText('Temps: ' + this.minute + this.seconde);
       this.soundbutton = this.sound.add("soundbutton");
       this.anims.create({
         key: "walk",
@@ -1170,7 +1183,7 @@ var config = {
   }
 };
 new Phaser.Game(config);
-},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../../Users/Shirohige/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1198,7 +1211,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51476" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50486" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1374,5 +1387,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
+},{}]},{},["../../../../Users/Shirohige/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
 //# sourceMappingURL=/main.1e43358e.js.map

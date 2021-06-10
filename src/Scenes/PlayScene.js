@@ -333,7 +333,7 @@ export class PlayScene extends Phaser.Scene {
     if (this.data.get('vies') == 0) {
       this.soundgame.stop();
       this.scene.stop();
-      this.scene.start(CST.SCENES.ENDING, this.score);
+      this.scene.start(CST.SCENES.ENDING, this.score, this.enemyDead, this.minute, this.seconde );
     } else if (this.data.get('vies') == 1) {
       this.iconeVie2.visible = false;
       this.iconeVie3.visible = false;
