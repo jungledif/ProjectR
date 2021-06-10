@@ -1,5 +1,18 @@
 {
   "dependencies": {
     "phaser": "^3.54.0"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "npm run build && webpack-dev-server --host=0.0.0.0 --port=$PORT --disable-host-check"
+  },
+  "devDependencies": {
+    "canvas": "^2.1.0",
+    "phaser": "^3.3.0",
+    "raw-loader": "^0.5.1",
+    "webpack": "^3.12.0",
+    "webpack-dev-server": "^2.11.0"
+  },
+  "heroku-run-build-script": true
 }
