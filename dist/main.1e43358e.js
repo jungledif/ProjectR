@@ -854,15 +854,15 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       if (obsticleNum > 3) {
         obsticle = this.obsticles.create(this.game.config.width + distance, this.game.config.height - enemyHeight[Math.floor(Math.random() * 2)], "enemy-spe1");
 
-        if (this.score >= 0 && this.score <= 199) {
+        if (this.score >= 0 && this.score <= 399) {
           obsticle.play('enemy--spe4', 1);
-        } else if (this.score >= 200 && this.score <= 399) {
+        } else if (this.score >= 400 && this.score <= 799) {
           obsticle.play('enemy--spe2', 1);
-        } else if (this.score >= 400 && this.score <= 599) {
+        } else if (this.score >= 800 && this.score <= 1199) {
           obsticle.play('enemy--spe3', 1);
-        } else if (this.score >= 600 && this.score <= 799) {
+        } else if (this.score >= 1200 && this.score <= 1599) {
           obsticle.play('enemy--spe1', 1);
-        } else if (this.score >= 800) {
+        } else if (this.score >= 1600) {
           obsticle.play('enemy--spe5', 1);
         }
 
@@ -1243,7 +1243,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41397" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33059" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

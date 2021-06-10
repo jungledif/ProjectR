@@ -217,11 +217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41397" + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46047" + '/');
->>>>>>> origin/feature/GameOverFinal
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33059" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
