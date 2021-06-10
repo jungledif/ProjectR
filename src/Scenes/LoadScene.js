@@ -19,7 +19,10 @@ export class LoadScene extends Phaser.Scene{
  this.load.audio("end_music", "./assets/audio/failsound.mp3");
 
  this.load.audio("soundbutton", "./assets/audio/screenbuttons.wav");
- 
+ this.load.image('sablier', './assets/image/time-01.svg');
+ this.load.image('mort', './assets/image/mort.svg');
+    
+ this.load.image('vitesse', './assets/image/vitesse.svg');
 //  this.load.image("options_button", "./assets/image/options_button1.png");
  this.load.image("play_button", "./assets/image/play_button1.png");
 //  this.load.image("logo", "./assets/image/logo.png");
