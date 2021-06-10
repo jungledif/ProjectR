@@ -1,11 +1,10 @@
 {
-  "dependencies": {
-    "phaser": "^3.54.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "start": "npm run build && webpack-dev-server --host=0.0.0.0 --port=$PORT --disable-host-check"
+  "name": "projectr",
+  "version": "1.0.0",
+  "description": "Phaser Game",
+  "main": "src/main.js",
+  "directories": {
+    "lib": "lib"
   },
   "devDependencies": {
     "canvas": "^2.1.0",
@@ -14,5 +13,20 @@
     "webpack": "^3.12.0",
     "webpack-dev-server": "^2.11.0"
   },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "npm run build && webpack-dev-server --host=0.0.0.0 --port=$PORT --disable-host-check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aigash/ProjectR.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aigash/ProjectR/issues"
+  },
+  "homepage": "https://github.com/aigash/ProjectR#readme",
   "heroku-run-build-script": true
 }
