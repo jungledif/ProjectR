@@ -10,11 +10,11 @@ export class PlayScene extends Phaser.Scene {
   }
 
   create() {
-    this.gameSpeed = 9;
+    this.gameSpeed = 2;
     this.backgroundSpeed = 2;
     this.isGameRunning = true;
     this.gameOver = false;
-    this.respawnTime = 0;
+    this.respawnTime = 900;
     this.score = 0;
     this.timePause = false;
     this.minute = 0;
@@ -45,6 +45,7 @@ export class PlayScene extends Phaser.Scene {
     this.initIcone();
 
     this.soundgame.play();
+
   }
 
   initIcone() {
@@ -353,6 +354,7 @@ export class PlayScene extends Phaser.Scene {
       this.placeObsticle();
       this.respawnTime = 0;
     }
+    
 
     this.obsticles.getChildren().forEach(obsticle => {
       if (obsticle.getBounds().right < 0) {

@@ -223,7 +223,6 @@ var LoadScene = /*#__PURE__*/function (_Phaser$Scene) {
       });
       this.load.on("progress", function (percent) {
         loadingBar.fillRect(0, _this.game.renderer.height / 2, _this.game.renderer.width * percent, 50);
-        console.log(percent);
       }); // this.load.on("complete", ()=>{
       //     console.log("Done");
       // })
@@ -533,11 +532,11 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
   _createClass(PlayScene, [{
     key: "create",
     value: function create() {
-      this.gameSpeed = 9;
+      this.gameSpeed = 2;
       this.backgroundSpeed = 2;
       this.isGameRunning = true;
       this.gameOver = false;
-      this.respawnTime = 0;
+      this.respawnTime = 900;
       this.score = 0;
       this.timePause = false;
       this.minute = 0;

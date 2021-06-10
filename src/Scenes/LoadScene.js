@@ -51,7 +51,6 @@ this.load.audio("title_music", "./assets/audio/shuinvy-childhood.mp3");
 
 this.load.on("progress", (percent)=>{
     loadingBar.fillRect(0, this.game.renderer.height / 2, this.game.renderer.width * percent, 50);
-    console.log(percent);
 })
 // this.load.on("complete", ()=>{
 //     console.log("Done");
