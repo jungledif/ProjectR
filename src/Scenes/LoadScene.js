@@ -30,6 +30,11 @@ export class LoadScene extends Phaser.Scene{
      frameWidth: 32
  });
 
+ this.load.spritesheet("eric", "./assets/sprite/eric.png",{
+    frameHeight: 32,
+    frameWidth: 29.5
+});
+
 this.load.audio("title_music", "./assets/audio/shuinvy-childhood.mp3");
  
 // for(let i = 0; i < 100; i++){

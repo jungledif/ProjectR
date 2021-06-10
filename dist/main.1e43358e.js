@@ -204,6 +204,10 @@ var LoadScene = /*#__PURE__*/function (_Phaser$Scene) {
         frameHeight: 32,
         frameWidth: 32
       });
+      this.load.spritesheet("eric", "./assets/sprite/eric.png", {
+        frameHeight: 32,
+        frameWidth: 29.5
+      });
       this.load.audio("title_music", "./assets/audio/shuinvy-childhood.mp3"); // for(let i = 0; i < 100; i++){
       //     this.load.spritesheet("cat" + i++,"./assets/sprite/cat.png", {
       //         frameWidth: 32,
@@ -299,16 +303,16 @@ var MenuScene = /*#__PURE__*/function (_Phaser$Scene) {
       });
       musicmenu.play();
       this.soundbutton = this.sound.add("soundbutton");
-      var hoverSprite = this.add.sprite(100, 100, "cat").setDepth(1);
-      hoverSprite.setScale(2);
+      var hoverSprite = this.add.sprite(100, 100, "eric").setDepth(1); //hoverSprite.setScale(2);
+
       hoverSprite.setVisible(false);
       this.anims.create({
         key: "walk",
-        frameRate: 4,
+        frameRate: 12,
         repeat: -1,
         //repeat forever
-        frames: this.anims.generateFrameNumbers("cat", {
-          frames: [0, 1, 2, 3]
+        frames: this.anims.generateFrameNumbers("eric", {
+          frames: [0, 1, 2, 3, 4, 5, 6, 7]
         })
       }); // fonction sur les buttons
       // PointerEvents:
@@ -1067,24 +1071,24 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
         loop: true
       });
       music.play();
-      var hoverSprite = this.add.sprite(100, 100, "cat").setDepth(1);
-      hoverSprite.setScale(2);
+      var hoverSprite = this.add.sprite(100, 100, "eric").setDepth(1); //hoverSprite.setScale(2);
+
       hoverSprite.setVisible(false);
+      this.anims.create({
+        key: "walk",
+        frameRate: 12,
+        repeat: -1,
+        //repeat forever
+        frames: this.anims.generateFrameNumbers("eric", {
+          frames: [0, 1, 2, 3, 4, 5, 6, 7]
+        })
+      });
       this.scoreText = this.add.text(1050, 0, '', {
         fill: "#ffffff",
         font: '900 35px Roboto'
       });
       this.scoreText.setText('Score: ' + this.score);
-      this.soundbutton = this.sound.add("soundbutton");
-      this.anims.create({
-        key: "walk",
-        frameRate: 4,
-        repeat: -1,
-        //repeat forever
-        frames: this.anims.generateFrameNumbers("cat", {
-          frames: [0, 1, 2, 3]
-        })
-      }); // fonction sur les buttons
+      this.soundbutton = this.sound.add("soundbutton"); // fonction sur les buttons
       // PointerEvents:
       // pointerover - hovering
       // pointerout - not hovering
@@ -1170,7 +1174,7 @@ var config = {
   }
 };
 new Phaser.Game(config);
-},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"C:/Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1198,7 +1202,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51476" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55496" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1374,5 +1378,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../Users/Drizix/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
+},{}]},{},["C:/Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
 //# sourceMappingURL=/main.1e43358e.js.map

@@ -23,16 +23,16 @@ export class MenuScene extends Phaser.Scene{
 
     this.soundbutton = this.sound.add("soundbutton");
 
-    let hoverSprite = this.add.sprite(100, 100, "cat").setDepth(1);
-    hoverSprite.setScale(2);
+    let hoverSprite = this.add.sprite(100, 100, "eric").setDepth(1);
+    //hoverSprite.setScale(2);
     hoverSprite.setVisible(false);
 
     this.anims.create({
         key: "walk",
-        frameRate: 4,
+        frameRate: 12,
         repeat: -1, //repeat forever
-        frames: this.anims.generateFrameNumbers("cat",{
-            frames: [0, 1, 2, 3]
+        frames: this.anims.generateFrameNumbers("eric",{
+            frames: [0, 1, 2, 3, 4, 5, 6, 7]
         })
     })
     
