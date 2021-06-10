@@ -21,7 +21,9 @@ export class MenuScene extends Phaser.Scene{
        })
     musicmenu.play();
 
-    this.soundbutton = this.sound.add("soundbutton");
+    this.soundbutton = this.sound.add("soundbutton",{
+        volume: 0.1
+      });
 
     let hoverSprite = this.add.sprite(100, 100, "eric").setDepth(1);
     //hoverSprite.setScale(2);

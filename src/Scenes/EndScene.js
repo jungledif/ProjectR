@@ -17,7 +17,7 @@ export class EndScene extends Phaser.Scene{
        let retryButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "retry_button");
        let backMenuButton = this.add.image(this.game.renderer.width /2, this.game.renderer.height / 2 + 100, "back_menu_button").setDepth(1);
        let music = this.sound.add("end_music", {
-           loop: true
+           loop: true, volume: 20
        })
        
        music.play();

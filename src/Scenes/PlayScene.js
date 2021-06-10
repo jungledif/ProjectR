@@ -44,7 +44,6 @@ export class PlayScene extends Phaser.Scene {
     this.handleInputs();
     this.initIcone();
 
-    this.soundgame = this.sound.add('soundgame');
     this.soundgame.play();
   }
 
@@ -64,16 +63,18 @@ export class PlayScene extends Phaser.Scene {
     this.iconeVie2.setScale(0.10);
     this.iconeVie3.setScale(0.10);
   }
-
+  
   initSound() {
-    this.soundHit = this.sound.add('hit');
+    this.soundgame = this.sound.add('soundgame',{volume: 10});
     this.soundEnd = this.sound.add('end');
-    this.soundHit2 = this.sound.add('hit2');
+    this.soundHit = this.sound.add('hit',{volume: 1.5});
+    this.soundEnd = this.sound.add('end');
+    this.soundHit2 = this.sound.add('hit2',{volume: 1.5});
     this.soundEnd2 = this.sound.add('end2');
-    this.soundJump = this.sound.add('jump');
-    this.soundPause = this.sound.add('pause');
-    this.soundGogogo = this.sound.add('gogogo');
-    this.soundLoseLife = this.sound.add('loselife');
+    this.soundJump = this.sound.add('jump',{volume: 2});
+    this.soundPause = this.sound.add('pause',{volume: 0.15});
+    // this.soundGogogo = this.sound.add('gogogo');
+    this.soundLoseLife = this.sound.add('loselife',{volume: 6 });
   }
 
   initTimeEvent() {
@@ -192,7 +193,7 @@ export class PlayScene extends Phaser.Scene {
           this.isGameRunning = true;
           this.timePause = false;
           this.soundPause.play();
-          this.soundGogogo.play();
+          // this.soundGogogo.play();
         }
         else {
           this.soundgame.pause();

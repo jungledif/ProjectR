@@ -302,7 +302,9 @@ var MenuScene = /*#__PURE__*/function (_Phaser$Scene) {
         loop: true
       });
       musicmenu.play();
-      this.soundbutton = this.sound.add("soundbutton");
+      this.soundbutton = this.sound.add("soundbutton", {
+        volume: 0.1
+      });
       var hoverSprite = this.add.sprite(100, 100, "eric").setDepth(1); //hoverSprite.setScale(2);
 
       hoverSprite.setVisible(false);
@@ -564,7 +566,6 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.initSound();
       this.handleInputs();
       this.initIcone();
-      this.soundgame = this.sound.add('soundgame');
       this.soundgame.play();
     }
   }, {
@@ -588,14 +589,28 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
   }, {
     key: "initSound",
     value: function initSound() {
-      this.soundHit = this.sound.add('hit');
+      this.soundgame = this.sound.add('soundgame', {
+        volume: 10
+      });
       this.soundEnd = this.sound.add('end');
-      this.soundHit2 = this.sound.add('hit2');
+      this.soundHit = this.sound.add('hit', {
+        volume: 1.5
+      });
+      this.soundEnd = this.sound.add('end');
+      this.soundHit2 = this.sound.add('hit2', {
+        volume: 1.5
+      });
       this.soundEnd2 = this.sound.add('end2');
-      this.soundJump = this.sound.add('jump');
-      this.soundPause = this.sound.add('pause');
-      this.soundGogogo = this.sound.add('gogogo');
-      this.soundLoseLife = this.sound.add('loselife');
+      this.soundJump = this.sound.add('jump', {
+        volume: 2
+      });
+      this.soundPause = this.sound.add('pause', {
+        volume: 0.15
+      }); // this.soundGogogo = this.sound.add('gogogo');
+
+      this.soundLoseLife = this.sound.add('loselife', {
+        volume: 6
+      });
     }
   }, {
     key: "initTimeEvent",
@@ -772,8 +787,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
             this.gameSpeed = currentGameSpeed;
             this.isGameRunning = true;
             this.timePause = false;
-            this.soundPause.play();
-            this.soundGogogo.play();
+            this.soundPause.play(); // this.soundGogogo.play();
           } else {
             this.soundgame.pause();
             this.anims.pauseAll();
@@ -1068,7 +1082,8 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
       var retryButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "retry_button");
       var backMenuButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, "back_menu_button").setDepth(1);
       var music = this.sound.add("end_music", {
-        loop: true
+        loop: true,
+        volume: 20
       });
       music.play();
       var hoverSprite = this.add.sprite(100, 100, "eric").setDepth(1); //hoverSprite.setScale(2);
@@ -1169,12 +1184,12 @@ var config = {
   physics: {
     default: 'arcade',
     arcade: {
-      debug: true
+      debug: false
     }
   }
 };
 new Phaser.Game(config);
-},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"C:/Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Scenes/LoadScene":"src/Scenes/LoadScene.js","./Scenes/MenuScene":"src/Scenes/MenuScene.js","./Scenes/PreloadScene":"src/Scenes/PreloadScene.js","./Scenes/PlayScene":"src/Scenes/PlayScene.js","./Scenes/EndScene":"src/Scenes/EndScene.js"}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1202,7 +1217,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55496" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41397" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -1378,5 +1393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/AiGash/AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
+},{}]},{},["../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/main.js"], null)
 //# sourceMappingURL=/main.1e43358e.js.map
