@@ -20,7 +20,7 @@ export class PlayScene extends Phaser.Scene {
     this.minute = 0;
     this.seconde = 0;
     this.bonusPoint = 10;
-
+    
     this.data.set('score', this.gameSpeed);
     this.data.set('time', this.minute + " : " + this.seconde);
     this.enemyDead = this.data.set('kill', 0);
@@ -335,7 +335,7 @@ export class PlayScene extends Phaser.Scene {
     if (this.data.get('vies') == 0) {
       this.soundgame.stop();
       this.scene.stop();
-      this.scene.start(CST.SCENES.ENDING, this.score);
+      this.scene.start(CST.SCENES.ENDING, [this.score, this.enemyDead, this.minute, this.seconde, this.gameSpeed]);
     } else if (this.data.get('vies') == 1) {
       this.iconeVie2.visible = false;
       this.iconeVie3.visible = false;

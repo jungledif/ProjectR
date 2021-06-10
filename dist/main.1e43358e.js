@@ -194,7 +194,10 @@ var LoadScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.load.image("end_bg", "./assets/image/backgroundend.png");
       this.load.audio("title_music", "./assets/audio/menu-music.mp3");
       this.load.audio("end_music", "./assets/audio/failsound.mp3");
-      this.load.audio("soundbutton", "./assets/audio/screenbuttons.wav"); //  this.load.image("options_button", "./assets/image/options_button1.png");
+      this.load.audio("soundbutton", "./assets/audio/screenbuttons.wav");
+      this.load.image('sablier', './assets/image/time-01.svg');
+      this.load.image('mort', './assets/image/mort.svg');
+      this.load.image('vitesse', './assets/image/vitesse.svg'); //  this.load.image("options_button", "./assets/image/options_button1.png");
 
       this.load.image("play_button", "./assets/image/play_button1.png"); //  this.load.image("logo", "./assets/image/logo.png");
 
@@ -426,9 +429,7 @@ var PreloadScene = /*#__PURE__*/function (_Phaser$Scene) {
       this.load.audio('hit2', ['./assets/audio/hitt2.wav']);
       this.load.audio('soundgame', ['./assets/audio/musicgame.mp3']);
       this.load.image('sablier', './assets/image/time-01.svg');
-      this.load.image('mort', './assets/image/mort.png');
       this.load.image('coeur', './assets/image/coeur.png');
-      this.load.image('botte', './assets/image/botte.png');
       this.load.image('score', './assets/image/score.png');
       this.load.spritesheet('perso', './assets/image/perso-run.png', {
         frameWidth: 88,
@@ -949,7 +950,7 @@ var PlayScene = /*#__PURE__*/function (_Phaser$Scene) {
       if (this.data.get('vies') == 0) {
         this.soundgame.stop();
         this.scene.stop();
-        this.scene.start(_CST.CST.SCENES.ENDING, this.score);
+        this.scene.start(_CST.CST.SCENES.ENDING, [this.score, this.enemyDead, this.minute, this.seconde, this.gameSpeed]);
       } else if (this.data.get('vies') == 1) {
         this.iconeVie2.visible = false;
         this.iconeVie3.visible = false;
@@ -1070,16 +1071,21 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
   _createClass(EndScene, [{
     key: "init",
     value: function init(data) {
-      this.score = data;
+      this.score = data[0];
+      this.enemyDead = data[1].list.kill;
+      this.minute = data[2];
+      this.seconde = data[3];
+      this.speed = data[4];
     }
   }, {
     key: "create",
     value: function create() {
       var _this = this;
 
+      console.log(this.enemyDead);
       this.add.image(0, 0, "end_bg").setOrigin(0);
-      var retryButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "retry_button");
-      var backMenuButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, "back_menu_button").setDepth(1);
+      var retryButton = this.add.image(this.game.renderer.width / 3, this.game.renderer.height / 2 + 180, "retry_button");
+      var backMenuButton = this.add.image(this.game.renderer.width / 1.5, this.game.renderer.height / 2 + 180, "back_menu_button").setDepth(1);
       var music = this.sound.add("end_music", {
         loop: true,
         volume: 20
@@ -1097,11 +1103,32 @@ var EndScene = /*#__PURE__*/function (_Phaser$Scene) {
           frames: [0, 1, 2, 3, 4, 5, 6, 7]
         })
       });
-      this.scoreText = this.add.text(1050, 0, '', {
+      this.scoreText = this.add.text(this.game.renderer.width / 2 - 60, this.game.renderer.height / 2 - 100, '', {
         fill: "#ffffff",
-        font: '900 35px Roboto'
+        font: '900 35px Sans Serif'
       });
       this.scoreText.setText('Score: ' + this.score);
+      this.killImg = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 50, "mort");
+      this.killImg.setScale(0.3);
+      this.killText = this.add.text(this.killImg.x + 30, this.killImg.y - 20, '', {
+        fill: "#ffffff",
+        font: '900 35px Sans Serif'
+      });
+      this.killText.setText(this.enemyDead);
+      this.timerImg = this.add.image(this.game.renderer.width / 2 - 270, this.game.renderer.height / 2 + 50, "sablier");
+      this.timerImg.setScale(0.3);
+      this.timerText = this.add.text(this.timerImg.x + 30, this.timerImg.y - 20, '', {
+        fill: "#ffffff",
+        font: '900 35px Sans Serif'
+      });
+      this.timerText.setText(this.minute + " m " + this.seconde + " s");
+      this.speedImg = this.add.image(this.game.renderer.width / 2 + 200, this.game.renderer.height / 2 + 50, "vitesse");
+      this.speedImg.setScale(0.3);
+      this.speedText = this.add.text(this.speedImg.x + 30, this.speedImg.y - 20, '', {
+        fill: "#ffffff",
+        font: '900 35px Sans Serif'
+      });
+      this.speedText.setText(this.speed.toFixed(2));
       this.soundbutton = this.sound.add("soundbutton"); // fonction sur les buttons
       // PointerEvents:
       // pointerover - hovering
