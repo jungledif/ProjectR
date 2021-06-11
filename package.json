@@ -28,5 +28,6 @@
     "url": "https://github.com/aigash/ProjectR/issues"
   },
   "homepage": "https://github.com/aigash/ProjectR#readme",
+  "heroku-postbuild": "webpack --config webpack.prod.js",
   "heroku-run-build-script": true
 }
